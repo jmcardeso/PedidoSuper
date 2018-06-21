@@ -13,14 +13,19 @@ Public Class frmPedidoFroiz
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Dim sResultadoHTML As String = ""
         Dim Productos As New List(Of Producto)
-        tbxResultado.Text = ""
+        Dim itemsHistoricoProductos As ListViewItem
+        lsvHistoricoProductos.Items.Clear()
 
-        If tbxProducto.Text <> "" Then
+        If lsvHistoricoProductos.Items.Count = 0 Then
             sResultadoHTML = RetHTML(URL_BUSQUEDA & tbxProducto.Text)
             Productos = RetProductos(sResultadoHTML)
             CrearXMLProductos(Productos)
+
             For Each Producto In Productos
-                tbxResultado.Text &= Producto.Nombre & " " & Producto.Precio.ToString & "€" & vbCrLf
+                itemsHistoricoProductos = New ListViewItem
+                itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
+                itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
+                lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
             Next
         End If
 

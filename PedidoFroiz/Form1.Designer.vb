@@ -23,10 +23,12 @@ Partial Class frmPedidoFroiz
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.tbxResultado = New System.Windows.Forms.TextBox()
         Me.tbxProducto = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.lsvHistoricoProductos = New System.Windows.Forms.ListView()
+        Me.Nombre = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Precio = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'btnBuscar
@@ -37,15 +39,6 @@ Partial Class frmPedidoFroiz
         Me.btnBuscar.TabIndex = 0
         Me.btnBuscar.Text = "Buscar"
         Me.btnBuscar.UseVisualStyleBackColor = True
-        '
-        'tbxResultado
-        '
-        Me.tbxResultado.Location = New System.Drawing.Point(12, 198)
-        Me.tbxResultado.Multiline = True
-        Me.tbxResultado.Name = "tbxResultado"
-        Me.tbxResultado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.tbxResultado.Size = New System.Drawing.Size(373, 240)
-        Me.tbxResultado.TabIndex = 1
         '
         'tbxProducto
         '
@@ -68,19 +61,40 @@ Partial Class frmPedidoFroiz
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(12, 182)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.Size = New System.Drawing.Size(116, 13)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Resultado:"
+        Me.Label2.Text = "Histótico de productos:"
+        '
+        'lsvHistoricoProductos
+        '
+        Me.lsvHistoricoProductos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nombre, Me.Precio})
+        Me.lsvHistoricoProductos.FullRowSelect = True
+        Me.lsvHistoricoProductos.GridLines = True
+        Me.lsvHistoricoProductos.Location = New System.Drawing.Point(10, 198)
+        Me.lsvHistoricoProductos.Name = "lsvHistoricoProductos"
+        Me.lsvHistoricoProductos.Size = New System.Drawing.Size(375, 240)
+        Me.lsvHistoricoProductos.TabIndex = 6
+        Me.lsvHistoricoProductos.UseCompatibleStateImageBehavior = False
+        Me.lsvHistoricoProductos.View = System.Windows.Forms.View.Details
+        '
+        'Nombre
+        '
+        Me.Nombre.Text = "Nombre"
+        Me.Nombre.Width = 261
+        '
+        'Precio
+        '
+        Me.Precio.Text = "Precio"
         '
         'frmPedidoFroiz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(398, 450)
+        Me.ClientSize = New System.Drawing.Size(806, 450)
+        Me.Controls.Add(Me.lsvHistoricoProductos)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.tbxProducto)
-        Me.Controls.Add(Me.tbxResultado)
         Me.Controls.Add(Me.btnBuscar)
         Me.Name = "frmPedidoFroiz"
         Me.Text = "PedidoFroiz"
@@ -90,8 +104,10 @@ Partial Class frmPedidoFroiz
     End Sub
 
     Friend WithEvents btnBuscar As Button
-    Friend WithEvents tbxResultado As TextBox
     Friend WithEvents tbxProducto As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents lsvHistoricoProductos As ListView
+    Friend WithEvents Nombre As ColumnHeader
+    Friend WithEvents Precio As ColumnHeader
 End Class
