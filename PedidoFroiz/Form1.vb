@@ -10,24 +10,32 @@ Public Class frmPedidoFroiz
     Const URL_BUSQUEDA = "https://www.froiz.com/shop/search.php?q="
 #End Region
 
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        Dim sResultadoHTML As String = ""
-        Dim Productos As New List(Of Producto)
-        Dim itemsHistoricoProductos As ListViewItem
-        lsvHistoricoProductos.Items.Clear()
+    'Private Sub btnBuscar_Click(sender As Object, e As EventArgs)
+    '    Dim sResultadoHTML As String = ""
+    '    Dim Productos As New List(Of Producto)
+    '    Dim itemsHistoricoProductos As ListViewItem
+    '    Dim n As Integer = 0
 
-        sResultadoHTML = RetHTML(URL_BUSQUEDA & tbxProducto.Text)
-        Productos = RetProductos(sResultadoHTML)
-        CrearXMLProductos(Productos)
+    '    lsvHistoricoProductos.Items.Clear()
 
-        For Each Producto In Productos
-            itemsHistoricoProductos = New ListViewItem
-            itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
-            itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
-            lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
-        Next
+    '    sResultadoHTML = RetHTML(URL_BUSQUEDA & tbxProducto.Text)
+    '    Productos = RetProductos(sResultadoHTML)
+    '    CrearXMLProductos(Productos)
 
-    End Sub
+    '    For Each Producto In Productos
+    '        itemsHistoricoProductos = New ListViewItem
+    '        If n Mod 2 Then
+    '            itemsHistoricoProductos.BackColor = Color.Honeydew
+    '        Else
+    '            itemsHistoricoProductos.BackColor = Color.White
+    '        End If
+    '        itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
+    '        itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
+    '        lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
+    '        n += 1
+    '    Next
+
+    'End Sub
 #Region "Funciones auxiliares"
     ''' <summary>
     ''' Devuelve una cadena con el contenido de una página web
