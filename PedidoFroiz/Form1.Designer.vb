@@ -70,6 +70,7 @@ Partial Class frmPedidoFroiz
         Me.lsvHistoricoProductos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nombre, Me.Precio})
         Me.lsvHistoricoProductos.FullRowSelect = True
         Me.lsvHistoricoProductos.GridLines = True
+        Me.lsvHistoricoProductos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lsvHistoricoProductos.Location = New System.Drawing.Point(10, 198)
         Me.lsvHistoricoProductos.Name = "lsvHistoricoProductos"
         Me.lsvHistoricoProductos.Size = New System.Drawing.Size(375, 240)

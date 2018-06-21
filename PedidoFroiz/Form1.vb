@@ -16,18 +16,16 @@ Public Class frmPedidoFroiz
         Dim itemsHistoricoProductos As ListViewItem
         lsvHistoricoProductos.Items.Clear()
 
-        If lsvHistoricoProductos.Items.Count = 0 Then
-            sResultadoHTML = RetHTML(URL_BUSQUEDA & tbxProducto.Text)
-            Productos = RetProductos(sResultadoHTML)
-            CrearXMLProductos(Productos)
+        sResultadoHTML = RetHTML(URL_BUSQUEDA & tbxProducto.Text)
+        Productos = RetProductos(sResultadoHTML)
+        CrearXMLProductos(Productos)
 
-            For Each Producto In Productos
-                itemsHistoricoProductos = New ListViewItem
-                itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
-                itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
-                lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
-            Next
-        End If
+        For Each Producto In Productos
+            itemsHistoricoProductos = New ListViewItem
+            itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
+            itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
+            lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
+        Next
 
     End Sub
 #Region "Funciones auxiliares"
