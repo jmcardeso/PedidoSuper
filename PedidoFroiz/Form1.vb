@@ -10,6 +10,17 @@ Public Class frmPedidoFroiz
     Const URL_BUSQUEDA = "https://www.froiz.com/shop/search.php?q="
 #End Region
 
+    Private Sub btnNuevoProducto_Click(sender As Object, e As EventArgs) Handles btnNuevoProducto.Click
+        frmBuscarProductos.ShowDialog()
+    End Sub
+
+    Private Sub btnVerPedidos_Click(sender As Object, e As EventArgs) Handles btnVerPedidos.Click
+        frmListaPedidos.ShowDialog()
+        If frmListaPedidos.DialogResult = DialogResult.OK Then
+            frmPedidoAntiguo.ShowDialog()
+        End If
+    End Sub
+
     'Private Sub btnBuscar_Click(sender As Object, e As EventArgs)
     '    Dim sResultadoHTML As String = ""
     '    Dim Productos As New List(Of Producto)
@@ -36,6 +47,7 @@ Public Class frmPedidoFroiz
     '    Next
 
     'End Sub
+
 #Region "Funciones auxiliares"
     ''' <summary>
     ''' Devuelve una cadena con el contenido de una página web

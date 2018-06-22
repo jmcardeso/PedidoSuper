@@ -65,7 +65,7 @@ Partial Class frmPedidoFroiz
         Me.lsvHistoricoProductos.Location = New System.Drawing.Point(12, 23)
         Me.lsvHistoricoProductos.Name = "lsvHistoricoProductos"
         Me.lsvHistoricoProductos.Size = New System.Drawing.Size(328, 240)
-        Me.lsvHistoricoProductos.TabIndex = 6
+        Me.lsvHistoricoProductos.TabIndex = 0
         Me.lsvHistoricoProductos.UseCompatibleStateImageBehavior = False
         Me.lsvHistoricoProductos.View = System.Windows.Forms.View.Details
         '
@@ -88,7 +88,7 @@ Partial Class frmPedidoFroiz
         Me.ListView1.Location = New System.Drawing.Point(431, 23)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(328, 240)
-        Me.ListView1.TabIndex = 7
+        Me.ListView1.TabIndex = 3
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
         '
@@ -117,7 +117,7 @@ Partial Class frmPedidoFroiz
         Me.btnAnhadirAPedido.Location = New System.Drawing.Point(364, 80)
         Me.btnAnhadirAPedido.Name = "btnAnhadirAPedido"
         Me.btnAnhadirAPedido.Size = New System.Drawing.Size(43, 40)
-        Me.btnAnhadirAPedido.TabIndex = 9
+        Me.btnAnhadirAPedido.TabIndex = 1
         Me.ttpFormulario.SetToolTip(Me.btnAnhadirAPedido, "Añadir el producto al pedido")
         Me.btnAnhadirAPedido.UseVisualStyleBackColor = True
         '
@@ -132,6 +132,9 @@ Partial Class frmPedidoFroiz
         Me.ImageList1.Images.SetKeyName(4, "derecha.png")
         Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
         Me.ImageList1.Images.SetKeyName(6, "lista.png")
+        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
+        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
+        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
         '
         'btnEliminarDePedido
         '
@@ -140,7 +143,7 @@ Partial Class frmPedidoFroiz
         Me.btnEliminarDePedido.Location = New System.Drawing.Point(364, 159)
         Me.btnEliminarDePedido.Name = "btnEliminarDePedido"
         Me.btnEliminarDePedido.Size = New System.Drawing.Size(43, 40)
-        Me.btnEliminarDePedido.TabIndex = 10
+        Me.btnEliminarDePedido.TabIndex = 2
         Me.ttpFormulario.SetToolTip(Me.btnEliminarDePedido, "Eliminar el producto del pedido")
         Me.btnEliminarDePedido.UseVisualStyleBackColor = True
         '
@@ -149,7 +152,7 @@ Partial Class frmPedidoFroiz
         Me.tbxTotal.Location = New System.Drawing.Point(689, 283)
         Me.tbxTotal.Name = "tbxTotal"
         Me.tbxTotal.Size = New System.Drawing.Size(69, 20)
-        Me.tbxTotal.TabIndex = 11
+        Me.tbxTotal.TabIndex = 10
         Me.tbxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label3
@@ -168,7 +171,7 @@ Partial Class frmPedidoFroiz
         Me.btnEliminarDelHistorico.Location = New System.Drawing.Point(12, 270)
         Me.btnEliminarDelHistorico.Name = "btnEliminarDelHistorico"
         Me.btnEliminarDelHistorico.Size = New System.Drawing.Size(43, 44)
-        Me.btnEliminarDelHistorico.TabIndex = 13
+        Me.btnEliminarDelHistorico.TabIndex = 4
         Me.ttpFormulario.SetToolTip(Me.btnEliminarDelHistorico, "Eliminar el producto")
         Me.btnEliminarDelHistorico.UseVisualStyleBackColor = True
         '
@@ -179,7 +182,7 @@ Partial Class frmPedidoFroiz
         Me.btnNuevoProducto.Location = New System.Drawing.Point(490, 270)
         Me.btnNuevoProducto.Name = "btnNuevoProducto"
         Me.btnNuevoProducto.Size = New System.Drawing.Size(43, 44)
-        Me.btnNuevoProducto.TabIndex = 14
+        Me.btnNuevoProducto.TabIndex = 8
         Me.btnNuevoProducto.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.ttpFormulario.SetToolTip(Me.btnNuevoProducto, "Añadir un nuevo producto")
         Me.btnNuevoProducto.UseVisualStyleBackColor = True
@@ -191,7 +194,7 @@ Partial Class frmPedidoFroiz
         Me.btnActualizarPrecios.Location = New System.Drawing.Point(72, 270)
         Me.btnActualizarPrecios.Name = "btnActualizarPrecios"
         Me.btnActualizarPrecios.Size = New System.Drawing.Size(43, 44)
-        Me.btnActualizarPrecios.TabIndex = 15
+        Me.btnActualizarPrecios.TabIndex = 5
         Me.ttpFormulario.SetToolTip(Me.btnActualizarPrecios, "Actualizar los precios")
         Me.btnActualizarPrecios.UseVisualStyleBackColor = True
         '
@@ -202,7 +205,7 @@ Partial Class frmPedidoFroiz
         Me.btnVerPedidos.Location = New System.Drawing.Point(132, 270)
         Me.btnVerPedidos.Name = "btnVerPedidos"
         Me.btnVerPedidos.Size = New System.Drawing.Size(43, 44)
-        Me.btnVerPedidos.TabIndex = 16
+        Me.btnVerPedidos.TabIndex = 6
         Me.ttpFormulario.SetToolTip(Me.btnVerPedidos, "Ver los anteriores pedidos")
         Me.btnVerPedidos.UseVisualStyleBackColor = True
         '
@@ -213,9 +216,12 @@ Partial Class frmPedidoFroiz
         Me.btnConfirmarPedido.Location = New System.Drawing.Point(548, 270)
         Me.btnConfirmarPedido.Name = "btnConfirmarPedido"
         Me.btnConfirmarPedido.Size = New System.Drawing.Size(43, 44)
-        Me.btnConfirmarPedido.TabIndex = 17
+        Me.btnConfirmarPedido.TabIndex = 9
         Me.ttpFormulario.SetToolTip(Me.btnConfirmarPedido, "Confirmar el pedido")
         Me.btnConfirmarPedido.UseVisualStyleBackColor = True
+        '
+        'ttpFormulario
+        '
         '
         'btnBorrarPedido
         '
@@ -224,7 +230,7 @@ Partial Class frmPedidoFroiz
         Me.btnBorrarPedido.Location = New System.Drawing.Point(431, 270)
         Me.btnBorrarPedido.Name = "btnBorrarPedido"
         Me.btnBorrarPedido.Size = New System.Drawing.Size(43, 44)
-        Me.btnBorrarPedido.TabIndex = 18
+        Me.btnBorrarPedido.TabIndex = 7
         Me.ttpFormulario.SetToolTip(Me.btnBorrarPedido, "Borrar el pedido")
         Me.btnBorrarPedido.UseVisualStyleBackColor = True
         '

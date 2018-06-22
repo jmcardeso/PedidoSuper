@@ -79,6 +79,24 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBuscarProductos.Designer.vb">
+      <DependentUpon>frmBuscarProductos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarProductos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListaPedidos.Designer.vb">
+      <DependentUpon>frmListaPedidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListaPedidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoAntiguo.Designer.vb">
+      <DependentUpon>frmPedidoAntiguo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoAntiguo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -98,6 +116,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarProductos.resx">
+      <DependentUpon>frmBuscarProductos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListaPedidos.resx">
+      <DependentUpon>frmListaPedidos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoAntiguo.resx">
+      <DependentUpon>frmPedidoAntiguo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
