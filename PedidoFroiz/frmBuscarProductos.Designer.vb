@@ -24,7 +24,7 @@ Partial Class frmBuscarProductos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBuscarProductos))
-        Me.txbNombreProducto = New System.Windows.Forms.TextBox()
+        Me.tbxNombreProducto = New System.Windows.Forms.TextBox()
         Me.btnBuscarProducto = New System.Windows.Forms.Button()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.lsvBusquedaProductos = New System.Windows.Forms.ListView()
@@ -36,12 +36,12 @@ Partial Class frmBuscarProductos
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
-        'txbNombreProducto
+        'tbxNombreProducto
         '
-        Me.txbNombreProducto.Location = New System.Drawing.Point(21, 27)
-        Me.txbNombreProducto.Name = "txbNombreProducto"
-        Me.txbNombreProducto.Size = New System.Drawing.Size(265, 20)
-        Me.txbNombreProducto.TabIndex = 0
+        Me.tbxNombreProducto.Location = New System.Drawing.Point(21, 27)
+        Me.tbxNombreProducto.Name = "tbxNombreProducto"
+        Me.tbxNombreProducto.Size = New System.Drawing.Size(265, 20)
+        Me.tbxNombreProducto.TabIndex = 0
         '
         'btnBuscarProducto
         '
@@ -136,7 +136,7 @@ Partial Class frmBuscarProductos
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lsvBusquedaProductos)
         Me.Controls.Add(Me.btnBuscarProducto)
-        Me.Controls.Add(Me.txbNombreProducto)
+        Me.Controls.Add(Me.tbxNombreProducto)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -147,7 +147,7 @@ Partial Class frmBuscarProductos
 
     End Sub
 
-    Friend WithEvents txbNombreProducto As TextBox
+    Friend WithEvents tbxNombreProducto As TextBox
     Friend WithEvents btnBuscarProducto As Button
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents lsvBusquedaProductos As ListView

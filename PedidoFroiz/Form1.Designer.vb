@@ -220,9 +220,6 @@ Partial Class frmPedidoFroiz
         Me.ttpFormulario.SetToolTip(Me.btnConfirmarPedido, "Confirmar el pedido")
         Me.btnConfirmarPedido.UseVisualStyleBackColor = True
         '
-        'ttpFormulario
-        '
-        '
         'btnBorrarPedido
         '
         Me.btnBorrarPedido.ImageIndex = 3
