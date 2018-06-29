@@ -28,7 +28,8 @@ Partial Class frmPedidoFroiz
         Me.lsvHistoricoProductos = New System.Windows.Forms.ListView()
         Me.Nombre = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Precio = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.lsvPedido = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
@@ -44,6 +45,7 @@ Partial Class frmPedidoFroiz
         Me.btnConfirmarPedido = New System.Windows.Forms.Button()
         Me.ttpFormulario = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnBorrarPedido = New System.Windows.Forms.Button()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'Label2
@@ -78,28 +80,35 @@ Partial Class frmPedidoFroiz
         '
         Me.Precio.Text = "Precio"
         '
-        'ListView1
+        'lsvPedido
         '
-        Me.ListView1.BackColor = System.Drawing.SystemColors.Window
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.ListView1.Location = New System.Drawing.Point(431, 23)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(328, 240)
-        Me.ListView1.TabIndex = 3
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.lsvPedido.BackColor = System.Drawing.SystemColors.Window
+        Me.lsvPedido.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader4})
+        Me.lsvPedido.FullRowSelect = True
+        Me.lsvPedido.GridLines = True
+        Me.lsvPedido.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvPedido.LabelEdit = True
+        Me.lsvPedido.Location = New System.Drawing.Point(431, 23)
+        Me.lsvPedido.Name = "lsvPedido"
+        Me.lsvPedido.Size = New System.Drawing.Size(391, 240)
+        Me.lsvPedido.TabIndex = 3
+        Me.lsvPedido.UseCompatibleStateImageBehavior = False
+        Me.lsvPedido.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Ud."
+        Me.ColumnHeader3.Width = 33
         '
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Nombre"
-        Me.ColumnHeader1.Width = 261
+        Me.ColumnHeader1.Width = 226
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Precio"
+        Me.ColumnHeader2.Text = "Precio Ud."
+        Me.ColumnHeader2.Width = 64
         '
         'Label1
         '
@@ -149,8 +158,10 @@ Partial Class frmPedidoFroiz
         '
         'tbxTotal
         '
-        Me.tbxTotal.Location = New System.Drawing.Point(689, 283)
+        Me.tbxTotal.BackColor = System.Drawing.SystemColors.Window
+        Me.tbxTotal.Location = New System.Drawing.Point(753, 283)
         Me.tbxTotal.Name = "tbxTotal"
+        Me.tbxTotal.ReadOnly = True
         Me.tbxTotal.Size = New System.Drawing.Size(69, 20)
         Me.tbxTotal.TabIndex = 10
         Me.tbxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -158,7 +169,7 @@ Partial Class frmPedidoFroiz
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(638, 286)
+        Me.Label3.Location = New System.Drawing.Point(702, 286)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 12
@@ -168,7 +179,7 @@ Partial Class frmPedidoFroiz
         '
         Me.btnEliminarDelHistorico.ImageIndex = 3
         Me.btnEliminarDelHistorico.ImageList = Me.ImageList1
-        Me.btnEliminarDelHistorico.Location = New System.Drawing.Point(12, 270)
+        Me.btnEliminarDelHistorico.Location = New System.Drawing.Point(71, 270)
         Me.btnEliminarDelHistorico.Name = "btnEliminarDelHistorico"
         Me.btnEliminarDelHistorico.Size = New System.Drawing.Size(43, 44)
         Me.btnEliminarDelHistorico.TabIndex = 4
@@ -179,7 +190,7 @@ Partial Class frmPedidoFroiz
         '
         Me.btnNuevoProducto.ImageIndex = 0
         Me.btnNuevoProducto.ImageList = Me.ImageList1
-        Me.btnNuevoProducto.Location = New System.Drawing.Point(490, 270)
+        Me.btnNuevoProducto.Location = New System.Drawing.Point(12, 270)
         Me.btnNuevoProducto.Name = "btnNuevoProducto"
         Me.btnNuevoProducto.Size = New System.Drawing.Size(43, 44)
         Me.btnNuevoProducto.TabIndex = 8
@@ -191,7 +202,7 @@ Partial Class frmPedidoFroiz
         '
         Me.btnActualizarPrecios.ImageIndex = 5
         Me.btnActualizarPrecios.ImageList = Me.ImageList1
-        Me.btnActualizarPrecios.Location = New System.Drawing.Point(72, 270)
+        Me.btnActualizarPrecios.Location = New System.Drawing.Point(129, 270)
         Me.btnActualizarPrecios.Name = "btnActualizarPrecios"
         Me.btnActualizarPrecios.Size = New System.Drawing.Size(43, 44)
         Me.btnActualizarPrecios.TabIndex = 5
@@ -202,7 +213,7 @@ Partial Class frmPedidoFroiz
         '
         Me.btnVerPedidos.ImageIndex = 6
         Me.btnVerPedidos.ImageList = Me.ImageList1
-        Me.btnVerPedidos.Location = New System.Drawing.Point(132, 270)
+        Me.btnVerPedidos.Location = New System.Drawing.Point(550, 270)
         Me.btnVerPedidos.Name = "btnVerPedidos"
         Me.btnVerPedidos.Size = New System.Drawing.Size(43, 44)
         Me.btnVerPedidos.TabIndex = 6
@@ -213,7 +224,7 @@ Partial Class frmPedidoFroiz
         '
         Me.btnConfirmarPedido.ImageIndex = 2
         Me.btnConfirmarPedido.ImageList = Me.ImageList1
-        Me.btnConfirmarPedido.Location = New System.Drawing.Point(548, 270)
+        Me.btnConfirmarPedido.Location = New System.Drawing.Point(431, 270)
         Me.btnConfirmarPedido.Name = "btnConfirmarPedido"
         Me.btnConfirmarPedido.Size = New System.Drawing.Size(43, 44)
         Me.btnConfirmarPedido.TabIndex = 9
@@ -224,18 +235,22 @@ Partial Class frmPedidoFroiz
         '
         Me.btnBorrarPedido.ImageIndex = 3
         Me.btnBorrarPedido.ImageList = Me.ImageList1
-        Me.btnBorrarPedido.Location = New System.Drawing.Point(431, 270)
+        Me.btnBorrarPedido.Location = New System.Drawing.Point(491, 270)
         Me.btnBorrarPedido.Name = "btnBorrarPedido"
         Me.btnBorrarPedido.Size = New System.Drawing.Size(43, 44)
         Me.btnBorrarPedido.TabIndex = 7
         Me.ttpFormulario.SetToolTip(Me.btnBorrarPedido, "Borrar el pedido")
         Me.btnBorrarPedido.UseVisualStyleBackColor = True
         '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Total"
+        '
         'frmPedidoFroiz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(769, 323)
+        Me.ClientSize = New System.Drawing.Size(833, 323)
         Me.Controls.Add(Me.btnBorrarPedido)
         Me.Controls.Add(Me.btnConfirmarPedido)
         Me.Controls.Add(Me.btnVerPedidos)
@@ -247,7 +262,7 @@ Partial Class frmPedidoFroiz
         Me.Controls.Add(Me.btnEliminarDePedido)
         Me.Controls.Add(Me.btnAnhadirAPedido)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.lsvPedido)
         Me.Controls.Add(Me.lsvHistoricoProductos)
         Me.Controls.Add(Me.Label2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -263,7 +278,7 @@ Partial Class frmPedidoFroiz
     Friend WithEvents lsvHistoricoProductos As ListView
     Friend WithEvents Nombre As ColumnHeader
     Friend WithEvents Precio As ColumnHeader
-    Friend WithEvents ListView1 As ListView
+    Friend WithEvents lsvPedido As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents Label1 As Label
@@ -279,4 +294,6 @@ Partial Class frmPedidoFroiz
     Friend WithEvents btnConfirmarPedido As Button
     Friend WithEvents ttpFormulario As ToolTip
     Friend WithEvents btnBorrarPedido As Button
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
 End Class

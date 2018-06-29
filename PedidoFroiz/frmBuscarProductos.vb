@@ -34,7 +34,7 @@
         Dim NuevoProducto As Producto
         Dim n As Integer
 
-        If lsvBusquedaProductos.SelectedItems.Count > 0 Then 'Si hay algún elemento seleccionado...
+        If itemsSeleccionados.Count > 0 Then 'Si hay algún elemento seleccionado...
             n = frmPedidoFroiz.lsvHistoricoProductos.Items.Count 'Asignamos al índice la posición del último elemento del histórico de productos para continuar a partir de ahí
             For Each itemsBusquedaProductos In itemsSeleccionados
                 nuevoItem = New ListViewItem 'Reinicializamos la variable llamando a su constructor
