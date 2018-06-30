@@ -33,7 +33,6 @@ Public Class frmPedidoFroiz
             Elemento.Save(RutaMisPedidos & "\Pedidos.xml")
         End If
         docXMLPedidos = XElement.Load(RutaMisPedidos & "\Pedidos.xml")
-
     End Sub
 
     Private Sub frmPedidoFroiz_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -159,7 +158,10 @@ Public Class frmPedidoFroiz
     End Sub
 
     Private Sub btnBorrarPedido_Click(sender As Object, e As EventArgs) Handles btnBorrarPedido.Click
-
+        If MessageBox.Show("¿Deseas borrar el pedido?", "BORRADO", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            lsvPedido.Items.Clear()
+            tbxTotal.Text = ""
+        End If
     End Sub
 
     Private Sub btnVerPedidos_Click(sender As Object, e As EventArgs) Handles btnVerPedidos.Click
@@ -176,27 +178,26 @@ Public Class frmPedidoFroiz
     ''' <param name="docXML">El xml con los productos</param>
     ''' <param name="BorrarListView">(Opcional) Verdadero para borrar el ListView</param>
     Public Sub DibujarHistoricoProductos(ByVal docXML As XElement, Optional ByVal BorrarListView As Boolean = False)
-        Dim Productos As New List(Of Producto) 'Creamos una lista de objetos de la clase Producto para poder 
-        Dim itemsHistoricoProductos As ListViewItem
-        Dim n As Integer = 0
+        Dim itemsHistoricoProductos As ListViewItem 'Definimos una variable del tipo elemento del control ListView
         Dim ListaProductos As IEnumerable(Of XElement) = docXMLProductos.Descendants("Producto") 'Llenamos una lista con todos los productos del xml
+        Dim n As Integer = 0
 
         If BorrarListView Then lsvHistoricoProductos.Items.Clear() 'Si el argumento opcional es True, borramos la lista
 
-        For Each elemento In ListaProductos 'Recorremos la lista y los añadimos a la lista de objetos Producto
-            Productos.Add(New Producto With {.Nombre = elemento.Element("Nombre").Value, .Precio = CDec(elemento.Element("Precio").Value.Replace(".", ","))})
+        For Each elemento In ListaProductos 'Recorremos la lista y le añadimos los productos
+            itemsHistoricoProductos = New ListViewItem 'Reinicializamos la clase con cada iteración para borrar sus datos
+            itemsHistoricoProductos.SubItems(0).Text = elemento.Element("Nombre").Value 'Asignamos el nombre...
+            itemsHistoricoProductos.SubItems.Add(elemento.Element("Precio").Value.Replace(".", ",") & "€") 'Y el precio...
+            lsvHistoricoProductos.Items.Add(itemsHistoricoProductos) 'Y los añadimos al ListView
         Next
+        lsvHistoricoProductos.Sorting = SortOrder.Ascending 'Forzamos la ordenación de la lista antes de colorear las línas para que queden bien
 
-        For Each Producto In Productos
-            itemsHistoricoProductos = New ListViewItem
-            If n Mod 2 Then
-                itemsHistoricoProductos.BackColor = Color.Honeydew
+        For Each item In lsvHistoricoProductos.Items
+            If n Mod 2 Then 'Si es par dibujamos en un color, si es impar en el otro
+                item.BackColor = Color.Honeydew
             Else
-                itemsHistoricoProductos.BackColor = Color.White
+                item.BackColor = Color.White
             End If
-            itemsHistoricoProductos.SubItems(0).Text = Producto.Nombre
-            itemsHistoricoProductos.SubItems.Add(Producto.Precio.ToString & "€")
-            lsvHistoricoProductos.Items.Add(itemsHistoricoProductos)
             n += 1
         Next
     End Sub
