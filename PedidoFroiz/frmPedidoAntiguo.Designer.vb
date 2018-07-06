@@ -30,7 +30,7 @@ Partial Class frmPedidoAntiguo
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbxTotal = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblPedidoFecha = New System.Windows.Forms.Label()
         Me.lsvPedidoAntiguo = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -86,20 +86,22 @@ Partial Class frmPedidoAntiguo
         '
         'tbxTotal
         '
+        Me.tbxTotal.BackColor = System.Drawing.SystemColors.Window
         Me.tbxTotal.Location = New System.Drawing.Point(270, 285)
         Me.tbxTotal.Name = "tbxTotal"
+        Me.tbxTotal.ReadOnly = True
         Me.tbxTotal.Size = New System.Drawing.Size(69, 20)
         Me.tbxTotal.TabIndex = 4
         Me.tbxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label1
+        'lblPedidoFecha
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 13)
-        Me.Label1.TabIndex = 16
-        Me.Label1.Text = "Pedido:"
+        Me.lblPedidoFecha.AutoSize = True
+        Me.lblPedidoFecha.Location = New System.Drawing.Point(9, 9)
+        Me.lblPedidoFecha.Name = "lblPedidoFecha"
+        Me.lblPedidoFecha.Size = New System.Drawing.Size(43, 13)
+        Me.lblPedidoFecha.TabIndex = 16
+        Me.lblPedidoFecha.Text = "Pedido:"
         '
         'lsvPedidoAntiguo
         '
@@ -109,6 +111,7 @@ Partial Class frmPedidoAntiguo
         Me.lsvPedidoAntiguo.GridLines = True
         Me.lsvPedidoAntiguo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lsvPedidoAntiguo.Location = New System.Drawing.Point(12, 25)
+        Me.lsvPedidoAntiguo.MultiSelect = False
         Me.lsvPedidoAntiguo.Name = "lsvPedidoAntiguo"
         Me.lsvPedidoAntiguo.Size = New System.Drawing.Size(328, 240)
         Me.lsvPedidoAntiguo.TabIndex = 0
@@ -117,12 +120,12 @@ Partial Class frmPedidoAntiguo
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Nombre"
+        Me.ColumnHeader1.Text = "Descripción"
         Me.ColumnHeader1.Width = 261
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Precio"
+        Me.ColumnHeader2.Text = "P.V.P."
         '
         'frmPedidoAntiguo
         '
@@ -134,7 +137,7 @@ Partial Class frmPedidoAntiguo
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.tbxTotal)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblPedidoFecha)
         Me.Controls.Add(Me.lsvPedidoAntiguo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -152,7 +155,7 @@ Partial Class frmPedidoAntiguo
     Friend WithEvents btnVolver As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents tbxTotal As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblPedidoFecha As Label
     Friend WithEvents lsvPedidoAntiguo As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader

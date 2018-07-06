@@ -32,6 +32,7 @@ Partial Class frmPedidoFroiz
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAnhadirAPedido = New System.Windows.Forms.Button()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
@@ -45,7 +46,6 @@ Partial Class frmPedidoFroiz
         Me.btnConfirmarPedido = New System.Windows.Forms.Button()
         Me.ttpFormulario = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnBorrarPedido = New System.Windows.Forms.Button()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'Label2
@@ -53,9 +53,9 @@ Partial Class frmPedidoFroiz
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(9, 7)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(116, 13)
+        Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Histórico de productos:"
+        Me.Label2.Text = "Productos:"
         '
         'lsvHistoricoProductos
         '
@@ -73,12 +73,12 @@ Partial Class frmPedidoFroiz
         '
         'Nombre
         '
-        Me.Nombre.Text = "Nombre"
-        Me.Nombre.Width = 261
+        Me.Nombre.Text = "Descripción"
+        Me.Nombre.Width = 260
         '
         'Precio
         '
-        Me.Precio.Text = "Precio"
+        Me.Precio.Text = "P.V.P."
         '
         'lsvPedido
         '
@@ -97,18 +97,23 @@ Partial Class frmPedidoFroiz
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Ud."
-        Me.ColumnHeader3.Width = 33
+        Me.ColumnHeader3.Text = "Cant."
+        Me.ColumnHeader3.Width = 38
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Nombre"
-        Me.ColumnHeader1.Width = 226
+        Me.ColumnHeader1.Text = "Descripción"
+        Me.ColumnHeader1.Width = 248
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Precio Ud."
-        Me.ColumnHeader2.Width = 64
+        Me.ColumnHeader2.Text = "P.V.P."
+        Me.ColumnHeader2.Width = 45
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Importe"
+        Me.ColumnHeader4.Width = 52
         '
         'Label1
         '
@@ -241,10 +246,6 @@ Partial Class frmPedidoFroiz
         Me.btnBorrarPedido.TabIndex = 7
         Me.ttpFormulario.SetToolTip(Me.btnBorrarPedido, "Borrar el pedido")
         Me.btnBorrarPedido.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Total"
         '
         'frmPedidoFroiz
         '

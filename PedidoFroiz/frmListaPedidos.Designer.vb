@@ -130,6 +130,7 @@ Partial Class frmListaPedidos
         Me.lsvBusquedaPedidos.GridLines = True
         Me.lsvBusquedaPedidos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lsvBusquedaPedidos.Location = New System.Drawing.Point(15, 73)
+        Me.lsvBusquedaPedidos.MultiSelect = False
         Me.lsvBusquedaPedidos.Name = "lsvBusquedaPedidos"
         Me.lsvBusquedaPedidos.Size = New System.Drawing.Size(328, 305)
         Me.lsvBusquedaPedidos.TabIndex = 3
