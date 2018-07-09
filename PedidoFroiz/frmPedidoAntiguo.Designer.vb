@@ -32,8 +32,11 @@ Partial Class frmPedidoAntiguo
         Me.tbxTotal = New System.Windows.Forms.TextBox()
         Me.lblPedidoFecha = New System.Windows.Forms.Label()
         Me.lsvPedidoAntiguo = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.plantillaPedido1 = New PedidoFroiz.PlantillaPedido()
         Me.SuspendLayout()
         '
         'btnImprimirPedido
@@ -78,7 +81,7 @@ Partial Class frmPedidoAntiguo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(219, 288)
+        Me.Label3.Location = New System.Drawing.Point(269, 288)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 18
@@ -87,7 +90,7 @@ Partial Class frmPedidoAntiguo
         'tbxTotal
         '
         Me.tbxTotal.BackColor = System.Drawing.SystemColors.Window
-        Me.tbxTotal.Location = New System.Drawing.Point(270, 285)
+        Me.tbxTotal.Location = New System.Drawing.Point(320, 285)
         Me.tbxTotal.Name = "tbxTotal"
         Me.tbxTotal.ReadOnly = True
         Me.tbxTotal.Size = New System.Drawing.Size(69, 20)
@@ -106,17 +109,22 @@ Partial Class frmPedidoAntiguo
         'lsvPedidoAntiguo
         '
         Me.lsvPedidoAntiguo.BackColor = System.Drawing.SystemColors.Window
-        Me.lsvPedidoAntiguo.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lsvPedidoAntiguo.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader4})
         Me.lsvPedidoAntiguo.FullRowSelect = True
         Me.lsvPedidoAntiguo.GridLines = True
         Me.lsvPedidoAntiguo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lsvPedidoAntiguo.Location = New System.Drawing.Point(12, 25)
         Me.lsvPedidoAntiguo.MultiSelect = False
         Me.lsvPedidoAntiguo.Name = "lsvPedidoAntiguo"
-        Me.lsvPedidoAntiguo.Size = New System.Drawing.Size(328, 240)
+        Me.lsvPedidoAntiguo.Size = New System.Drawing.Size(376, 240)
         Me.lsvPedidoAntiguo.TabIndex = 0
         Me.lsvPedidoAntiguo.UseCompatibleStateImageBehavior = False
         Me.lsvPedidoAntiguo.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Cant."
+        Me.ColumnHeader3.Width = 41
         '
         'ColumnHeader1
         '
@@ -127,12 +135,16 @@ Partial Class frmPedidoAntiguo
         '
         Me.ColumnHeader2.Text = "P.V.P."
         '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Importe"
+        '
         'frmPedidoAntiguo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnVolver
-        Me.ClientSize = New System.Drawing.Size(355, 331)
+        Me.ClientSize = New System.Drawing.Size(400, 331)
         Me.Controls.Add(Me.btnImprimirPedido)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.Label3)
@@ -159,4 +171,7 @@ Partial Class frmPedidoAntiguo
     Friend WithEvents lsvPedidoAntiguo As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents plantillaPedido1 As PlantillaPedido
 End Class
