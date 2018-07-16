@@ -77,7 +77,6 @@ Partial Class frmBuscarProductos
         Me.lsvBusquedaProductos.GridLines = True
         Me.lsvBusquedaProductos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lsvBusquedaProductos.Location = New System.Drawing.Point(21, 66)
-        Me.lsvBusquedaProductos.MultiSelect = False
         Me.lsvBusquedaProductos.Name = "lsvBusquedaProductos"
         Me.lsvBusquedaProductos.Size = New System.Drawing.Size(328, 240)
         Me.lsvBusquedaProductos.TabIndex = 2

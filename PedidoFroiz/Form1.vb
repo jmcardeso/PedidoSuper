@@ -62,7 +62,7 @@ Public Class frmPedidoFroiz
         Dim item As ListViewItem 'Esta variable la necesitamos para el bucle For Each
         Dim ListaNombresProductos As IEnumerable(Of XElement) = docXMLProductos.Descendants("Producto") 'Rellenamos una lista con los nodos "Producto" del xml
 
-        If lsvHistoricoProductos.Items.Count = 0 Then
+        If lsvHistoricoProductos.Items.Count = 0 Then 'Si no hay productos, avisamos al usuario y salimos
             MessageBox.Show("La lista de productos está vacía", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
@@ -76,39 +76,38 @@ Public Class frmPedidoFroiz
             Next
             DibujarHistoricoProductos(docXMLProductos.Descendants("Producto"), True) 'Redibujamos la lista de productos
         Else
-            MessageBox.Show("No se ha seleccionado ningún producto", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("No se ha seleccionado ningún producto", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning) 'Si hay productos, pero no hemos seleccionado ninguno, avisamos al usuario y nos vamos
         End If
     End Sub
 
     Private Sub btnActualizarPrecios_Click(sender As Object, e As EventArgs) Handles btnActualizarPrecios.Click
-        Dim elemento As ListViewItem
-        Dim sResultadoHTML As String = ""
-        Dim Productos As List(Of ListViewItem)
-        Dim Producto As ListViewItem
-        Dim Encontrado As Boolean = False
+        Dim Productos As List(Of ListViewItem) 'Declaramos una lista de ListViewItems para almacenar los productos de la web...
+        Dim Producto, elemento As ListViewItem 'Y dos variables ListViewItem; una para recorrer el control ListView y otra para recorrer la lista de productos
+        Dim sResultadoHTML As String = "" 'Declaramos una cadena para guardar la página web
+        Dim Encontrado As Boolean = False 'Encontrado es el flag que nos indicará si el producto se encuentra en los resultados de la búsqueda web
 
-        If lsvHistoricoProductos.Items.Count > 0 Then
-            If lsvHistoricoProductos.SelectedItems.Count > 0 Then
-                For Each elemento In lsvHistoricoProductos.SelectedItems
-                    sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text)
-                    Productos = RetProductos(sResultadoHTML)
-                    For Each Producto In Productos
-                        If Producto.SubItems(0).Text = elemento.SubItems(0).Text Then
-                            elemento.SubItems(1).Text = Producto.SubItems(1).Text
-                            Encontrado = True
-                        Else
-                            If Not Encontrado Then
+        If lsvHistoricoProductos.Items.Count > 0 Then 'Primer control: ¿Hay elementos en la lista de productos? Si los hay, entonces...
+            If lsvHistoricoProductos.SelectedItems.Count > 0 Then 'Segundo control: ¿Hay alguno seleccionado? (en ese caso, sólo se actualizarán los precios de los seleccionados)
+                For Each elemento In lsvHistoricoProductos.SelectedItems 'Recorremos la lista de seleccionados...
+                    sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text) 'Buscamos cada producto en la web...
+                    Productos = RetProductos(sResultadoHTML) 'Y los guardamos en la lista Productos (puede haber más de un producto debido al funcionamiento de la web de Froiz)
+                    For Each Producto In Productos 'Recorremos la lista Productos...
+                        If Producto.SubItems(0).Text = elemento.SubItems(0).Text Then 'Y en caso de que el nombre sea igual al que buscamos...
+                            elemento.SubItems(1).Text = Producto.SubItems(1).Text 'Asignamos el precio que aparece en la web al campo precio del producto...
+                            Encontrado = True 'Y activamos el flag Encontrado
+                        Else 'Si el nombre es distinto...
+                            If Not Encontrado Then 'Y el producto no se ha encontrado aún, avisamos al usuario
                                 MessageBox.Show("El producto " & Chr(34) & elemento.SubItems(0).Text & Chr(34) & " no se encuentra y no se puede actualizar su precio", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                             End If
                         End If
                     Next
                 Next
-                AnhadirXMLProductos(lsvHistoricoProductos.SelectedItems, True)
-                lsvHistoricoProductos.SelectedItems.Clear()
-            Else
-                For Each elemento In lsvHistoricoProductos.Items
-                    sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text)
-                    Productos = RetProductos(sResultadoHTML)
+                AnhadirXMLProductos(lsvHistoricoProductos.SelectedItems, True) 'Sobreescribimos el producto con su precio actualizado en el xml...
+                lsvHistoricoProductos.SelectedItems.Clear() 'Y borramos la lista de elementos seleccionados del control ListView
+            Else '[Segundo control] Si no hay ningún elemento seleccionado quiere decir que actualizamos el precio de toda la lista
+                For Each elemento In lsvHistoricoProductos.Items 'Recorremos toda la lista...
+                    sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text) 'Buscamos cada producto en la web...
+                    Productos = RetProductos(sResultadoHTML) 'Etc, etc...
                     For Each Producto In Productos
                         If Producto.SubItems(0).Text = elemento.SubItems(0).Text Then
                             elemento.SubItems(1).Text = Producto.SubItems(1).Text
@@ -122,7 +121,7 @@ Public Class frmPedidoFroiz
                 Next
                 AnhadirXMLProductos(lsvHistoricoProductos.Items, True)
             End If
-        Else
+        Else '[Primer control] Si no hay elementos en la lista de productos, avisamos al usuario y salimos
             MessageBox.Show("La lista de productos está vacía", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
@@ -133,8 +132,6 @@ Public Class frmPedidoFroiz
         Dim itemProductosPedido = New ListViewItem 'Esta variable la necesitamos para el bucle For Each. Reutilizamos la que empleamos en el procedimento de búsqueda
         Dim n As Integer
         Dim Total As Decimal = 0
-
-        'AÑADIR COMPROBACIÓN PARA CUANDO SE AÑADE OTRA VEZ UN PRODUCTO PERO CAMBIÓ DE PRECIO (AHORA LO AÑADE MAL - PONE 2 PRECIOS DISTINTOS)
 
         If itemsSeleccionados.Count > 0 Then 'Si hay algún elemento seleccionado...
             If tbxTotal.Text.Length > 0 Then Total = CDec(tbxTotal.Text.TrimEnd("€"c)) 'Si hay total, ponlo en la variable
@@ -152,7 +149,17 @@ Public Class frmPedidoFroiz
                 nuevoItem.SubItems.Add(nuevoItem.SubItems(2).Text) 'Y el precio*unidades, también con el euro (por ahora es el mismo que el precio de 1 ud.)
                 itemRepetido = lsvPedido.FindItemWithText(nuevoItem.SubItems(1).Text) 'Buscamos si el producto ya está en la lista
                 If itemRepetido IsNot Nothing Then 'Si el producto ya está en el pedido...
-                    If MessageBox.Show("El producto " & Chr(34) & nuevoItem.SubItems(1).Text & Chr(34) & " ya está en el pedido, ¿Desea añadir una unidad?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then 'Preguntamos si queremos añadir una unidad
+                    If itemRepetido.SubItems(2).Text <> nuevoItem.SubItems(2).Text Then
+                        If MessageBox.Show("El producto " & Chr(34) & nuevoItem.SubItems(1).Text & Chr(34) & " ya está en el pedido y su precio ha cambiado, ¿Desea añadir una unidad y actualizar el precio?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+                            itemRepetido.SubItems(0).Text = (CDec(itemRepetido.SubItems(0).Text) + 1).ToString 'Le sumamos 1 a las unidades
+                            Total -= CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Restamos del total el precio de la línea
+                            itemRepetido.SubItems(2).Text = nuevoItem.SubItems(2).Text 'Actualizamos el PVP...
+                            itemRepetido.SubItems(3).Text = (CDec(itemRepetido.SubItems(0).Text.TrimEnd("€"c)) * CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c))).ToString & "€" 'Multiplicamos las unidades por su PVP...
+                            Total += CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Recalculamos el total...
+                        End If
+                        Continue For 'Y pasamos a la siguiente iteración del bucle
+                    End If
+                    If MessageBox.Show("El producto " & Chr(34) & nuevoItem.SubItems(1).Text & Chr(34) & " ya está en el pedido, ¿Desea añadir una unidad?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then 'Preguntamos si queremos añadir una unidad
                         itemRepetido.SubItems(0).Text = (CDec(itemRepetido.SubItems(0).Text) + 1).ToString 'Le sumamos 1 a las unidades
                         Total -= CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Restamos del total el precio de la línea
                         itemRepetido.SubItems(3).Text = (CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) + CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c))).ToString & "€" 'Sumamos al precio de la línea el precio de 1 unidad del producto
@@ -334,7 +341,7 @@ Public Class frmPedidoFroiz
         Dim Pedido As XElement 'El nodo "Pedido"
         Dim Fecha, Total As XAttribute 'Los atributos de "Pedido"
         Dim Producto As ListViewItem 'El iterador de la lista de productos
-        Dim ProductoPedido As XElement 'El contenido del nodo "Pedido", es decir, liygkjbjkb
+        Dim ProductoPedido As XElement 'El contenido del nodo "Pedido", es decir, Producto (Unidades, Nombre, PrecioUd, Precio)
 
         Pedido = New XElement("Pedido") 'Creamos un nodo "Pedido"...
         Fecha = New XAttribute("Fecha", Date.Today.ToShortDateString) 'Le asignamos el atributo "Fecha"...
@@ -355,7 +362,7 @@ Public Class frmPedidoFroiz
     ''' <param name="Sobreescribir">(Opcional) Si es True y el producto ya existe, lo sobreescribe</param>
     ''' <returns>Verdadero si los productos no existen en el xml y se pueden añadir, falso en caso contrario</returns>
     Public Function AnhadirXMLProductos(ByVal listaProductos As ListView.SelectedListViewItemCollection, Optional ByVal Sobreescribir As Boolean = False) As Boolean
-        Dim ListaNombresProductos As IEnumerable(Of XElement) = docXMLProductos.Descendants("Producto") 'Creamos una lista con todos los nombres de productos del xml
+        Dim ListaNombresProductos As IEnumerable(Of XElement) = docXMLProductos.Descendants("Producto") 'Creamos una lista con todos los productos del xml
         Dim Producto As ListViewItem 'Declaramos el iterador que recorrerá la lista
         Dim resultado As Boolean = True
         Dim ResultadoLINQ As IEnumerable(Of XElement)
