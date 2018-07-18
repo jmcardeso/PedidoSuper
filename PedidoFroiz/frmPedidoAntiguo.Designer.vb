@@ -26,8 +26,8 @@ Partial Class frmPedidoAntiguo
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPedidoAntiguo))
         Me.ttpFormulario = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnImprimirPedido = New System.Windows.Forms.Button()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.btnVolver = New System.Windows.Forms.Button()
+        Me.btnEditarLinea = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbxTotal = New System.Windows.Forms.TextBox()
         Me.lblPedidoFecha = New System.Windows.Forms.Label()
@@ -39,13 +39,11 @@ Partial Class frmPedidoAntiguo
         Me.ElegirImpresora = New System.Windows.Forms.PrintDialog()
         Me.DocImpresora = New System.Drawing.Printing.PrintDocument()
         Me.plantillaPedido1 = New PedidoFroiz.PlantillaPedido()
-        Me.btnEditarLinea = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnImprimirPedido
         '
-        Me.btnImprimirPedido.ImageIndex = 8
-        Me.btnImprimirPedido.ImageList = Me.ImageList1
+        Me.btnImprimirPedido.Image = Global.PedidoFroiz.My.Resources.Resources.imprimir
         Me.btnImprimirPedido.Location = New System.Drawing.Point(68, 275)
         Me.btnImprimirPedido.Name = "btnImprimirPedido"
         Me.btnImprimirPedido.Size = New System.Drawing.Size(43, 44)
@@ -53,27 +51,10 @@ Partial Class frmPedidoAntiguo
         Me.ttpFormulario.SetToolTip(Me.btnImprimirPedido, "Imprimir el pedido")
         Me.btnImprimirPedido.UseVisualStyleBackColor = True
         '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "actualizar.png")
-        Me.ImageList1.Images.SetKeyName(1, "Anhadir.png")
-        Me.ImageList1.Images.SetKeyName(2, "borrar.png")
-        Me.ImageList1.Images.SetKeyName(3, "confirmar.png")
-        Me.ImageList1.Images.SetKeyName(4, "derecha.png")
-        Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
-        Me.ImageList1.Images.SetKeyName(6, "lista.png")
-        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
-        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
-        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
-        Me.ImageList1.Images.SetKeyName(10, "editar.ico")
-        '
         'btnVolver
         '
         Me.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnVolver.ImageIndex = 9
-        Me.btnVolver.ImageList = Me.ImageList1
+        Me.btnVolver.Image = Global.PedidoFroiz.My.Resources.Resources.volver
         Me.btnVolver.Location = New System.Drawing.Point(127, 275)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(43, 44)
@@ -81,6 +62,17 @@ Partial Class frmPedidoAntiguo
         Me.btnVolver.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.ttpFormulario.SetToolTip(Me.btnVolver, "Volver al formulario principal")
         Me.btnVolver.UseVisualStyleBackColor = True
+        '
+        'btnEditarLinea
+        '
+        Me.btnEditarLinea.Image = Global.PedidoFroiz.My.Resources.Resources.if_edit_56106
+        Me.btnEditarLinea.Location = New System.Drawing.Point(12, 275)
+        Me.btnEditarLinea.Name = "btnEditarLinea"
+        Me.btnEditarLinea.Size = New System.Drawing.Size(43, 44)
+        Me.btnEditarLinea.TabIndex = 19
+        Me.btnEditarLinea.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.ttpFormulario.SetToolTip(Me.btnEditarLinea, "Editar una línea del pedido")
+        Me.btnEditarLinea.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -147,18 +139,6 @@ Partial Class frmPedidoAntiguo
         '
         Me.ElegirImpresora.UseEXDialog = True
         '
-        'btnEditarLinea
-        '
-        Me.btnEditarLinea.ImageIndex = 10
-        Me.btnEditarLinea.ImageList = Me.ImageList1
-        Me.btnEditarLinea.Location = New System.Drawing.Point(12, 275)
-        Me.btnEditarLinea.Name = "btnEditarLinea"
-        Me.btnEditarLinea.Size = New System.Drawing.Size(43, 44)
-        Me.btnEditarLinea.TabIndex = 19
-        Me.btnEditarLinea.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.ttpFormulario.SetToolTip(Me.btnEditarLinea, "Editar una línea del pedido")
-        Me.btnEditarLinea.UseVisualStyleBackColor = True
-        '
         'frmPedidoAntiguo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -184,7 +164,6 @@ Partial Class frmPedidoAntiguo
 
     Friend WithEvents ttpFormulario As ToolTip
     Friend WithEvents btnImprimirPedido As Button
-    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents btnVolver As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents tbxTotal As TextBox

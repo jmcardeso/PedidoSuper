@@ -28,7 +28,6 @@ Partial Class frmListaPedidos
         Me.dtpHastaFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnVerPedido = New System.Windows.Forms.Button()
@@ -72,25 +71,9 @@ Partial Class frmListaPedidos
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Hasta:"
         '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "actualizar.png")
-        Me.ImageList1.Images.SetKeyName(1, "Anhadir.png")
-        Me.ImageList1.Images.SetKeyName(2, "borrar.png")
-        Me.ImageList1.Images.SetKeyName(3, "confirmar.png")
-        Me.ImageList1.Images.SetKeyName(4, "derecha.png")
-        Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
-        Me.ImageList1.Images.SetKeyName(6, "lista.png")
-        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
-        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
-        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
-        '
         'btnBuscar
         '
-        Me.btnBuscar.ImageIndex = 7
-        Me.btnBuscar.ImageList = Me.ImageList1
+        Me.btnBuscar.Image = Global.PedidoFroiz.My.Resources.Resources.buscar
         Me.btnBuscar.Location = New System.Drawing.Point(300, 12)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(43, 44)
@@ -101,8 +84,7 @@ Partial Class frmListaPedidos
         'btnVerPedido
         '
         Me.btnVerPedido.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnVerPedido.ImageIndex = 2
-        Me.btnVerPedido.ImageList = Me.ImageList1
+        Me.btnVerPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
         Me.btnVerPedido.Location = New System.Drawing.Point(243, 394)
         Me.btnVerPedido.Name = "btnVerPedido"
         Me.btnVerPedido.Size = New System.Drawing.Size(43, 44)
@@ -113,8 +95,7 @@ Partial Class frmListaPedidos
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.ImageIndex = 3
-        Me.btnCancelar.ImageList = Me.ImageList1
+        Me.btnCancelar.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
         Me.btnCancelar.Location = New System.Drawing.Point(300, 394)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(43, 44)
@@ -175,7 +156,6 @@ Partial Class frmListaPedidos
     Friend WithEvents dtpHastaFecha As DateTimePicker
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents btnBuscar As Button
     Friend WithEvents lsvBusquedaPedidos As ListView

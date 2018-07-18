@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmPedidoFroiz
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmPedidoFroiz
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPedidoFroiz))
@@ -35,7 +35,6 @@ Partial Class frmPedidoFroiz
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAnhadirAPedido = New System.Windows.Forms.Button()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.btnEliminarDePedido = New System.Windows.Forms.Button()
         Me.tbxTotal = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -126,8 +125,7 @@ Partial Class frmPedidoFroiz
         '
         'btnAnhadirAPedido
         '
-        Me.btnAnhadirAPedido.ImageIndex = 4
-        Me.btnAnhadirAPedido.ImageList = Me.ImageList1
+        Me.btnAnhadirAPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Forward_32479
         Me.btnAnhadirAPedido.Location = New System.Drawing.Point(364, 80)
         Me.btnAnhadirAPedido.Name = "btnAnhadirAPedido"
         Me.btnAnhadirAPedido.Size = New System.Drawing.Size(43, 40)
@@ -135,25 +133,9 @@ Partial Class frmPedidoFroiz
         Me.ttpFormulario.SetToolTip(Me.btnAnhadirAPedido, "Añadir el producto al pedido")
         Me.btnAnhadirAPedido.UseVisualStyleBackColor = True
         '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "actualizar.png")
-        Me.ImageList1.Images.SetKeyName(1, "Anhadir.png")
-        Me.ImageList1.Images.SetKeyName(2, "borrar.png")
-        Me.ImageList1.Images.SetKeyName(3, "confirmar.png")
-        Me.ImageList1.Images.SetKeyName(4, "derecha.png")
-        Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
-        Me.ImageList1.Images.SetKeyName(6, "lista.png")
-        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
-        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
-        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
-        '
         'btnEliminarDePedido
         '
-        Me.btnEliminarDePedido.ImageIndex = 1
-        Me.btnEliminarDePedido.ImageList = Me.ImageList1
+        Me.btnEliminarDePedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Back_32435
         Me.btnEliminarDePedido.Location = New System.Drawing.Point(364, 159)
         Me.btnEliminarDePedido.Name = "btnEliminarDePedido"
         Me.btnEliminarDePedido.Size = New System.Drawing.Size(43, 40)
@@ -182,8 +164,7 @@ Partial Class frmPedidoFroiz
         '
         'btnEliminarDelHistorico
         '
-        Me.btnEliminarDelHistorico.ImageIndex = 3
-        Me.btnEliminarDelHistorico.ImageList = Me.ImageList1
+        Me.btnEliminarDelHistorico.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
         Me.btnEliminarDelHistorico.Location = New System.Drawing.Point(71, 270)
         Me.btnEliminarDelHistorico.Name = "btnEliminarDelHistorico"
         Me.btnEliminarDelHistorico.Size = New System.Drawing.Size(43, 44)
@@ -193,8 +174,7 @@ Partial Class frmPedidoFroiz
         '
         'btnNuevoProducto
         '
-        Me.btnNuevoProducto.ImageIndex = 0
-        Me.btnNuevoProducto.ImageList = Me.ImageList1
+        Me.btnNuevoProducto.Image = Global.PedidoFroiz.My.Resources.Resources.if_add_36834
         Me.btnNuevoProducto.Location = New System.Drawing.Point(12, 270)
         Me.btnNuevoProducto.Name = "btnNuevoProducto"
         Me.btnNuevoProducto.Size = New System.Drawing.Size(43, 44)
@@ -205,8 +185,7 @@ Partial Class frmPedidoFroiz
         '
         'btnActualizarPrecios
         '
-        Me.btnActualizarPrecios.ImageIndex = 5
-        Me.btnActualizarPrecios.ImageList = Me.ImageList1
+        Me.btnActualizarPrecios.Image = Global.PedidoFroiz.My.Resources.Resources.if_Refresh_132376
         Me.btnActualizarPrecios.Location = New System.Drawing.Point(129, 270)
         Me.btnActualizarPrecios.Name = "btnActualizarPrecios"
         Me.btnActualizarPrecios.Size = New System.Drawing.Size(43, 44)
@@ -216,8 +195,7 @@ Partial Class frmPedidoFroiz
         '
         'btnVerPedidos
         '
-        Me.btnVerPedidos.ImageIndex = 6
-        Me.btnVerPedidos.ImageList = Me.ImageList1
+        Me.btnVerPedidos.Image = Global.PedidoFroiz.My.Resources.Resources.if_window_app_list_chart_36989
         Me.btnVerPedidos.Location = New System.Drawing.Point(550, 270)
         Me.btnVerPedidos.Name = "btnVerPedidos"
         Me.btnVerPedidos.Size = New System.Drawing.Size(43, 44)
@@ -227,8 +205,7 @@ Partial Class frmPedidoFroiz
         '
         'btnConfirmarPedido
         '
-        Me.btnConfirmarPedido.ImageIndex = 2
-        Me.btnConfirmarPedido.ImageList = Me.ImageList1
+        Me.btnConfirmarPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
         Me.btnConfirmarPedido.Location = New System.Drawing.Point(431, 270)
         Me.btnConfirmarPedido.Name = "btnConfirmarPedido"
         Me.btnConfirmarPedido.Size = New System.Drawing.Size(43, 44)
@@ -238,8 +215,7 @@ Partial Class frmPedidoFroiz
         '
         'btnBorrarPedido
         '
-        Me.btnBorrarPedido.ImageIndex = 3
-        Me.btnBorrarPedido.ImageList = Me.ImageList1
+        Me.btnBorrarPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
         Me.btnBorrarPedido.Location = New System.Drawing.Point(491, 270)
         Me.btnBorrarPedido.Name = "btnBorrarPedido"
         Me.btnBorrarPedido.Size = New System.Drawing.Size(43, 44)
@@ -284,7 +260,6 @@ Partial Class frmPedidoFroiz
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents Label1 As Label
     Friend WithEvents btnAnhadirAPedido As Button
-    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents btnEliminarDePedido As Button
     Friend WithEvents tbxTotal As TextBox
     Friend WithEvents Label3 As Label

@@ -23,7 +23,6 @@ Partial Class dlgEditarLinea
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgEditarLinea))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -33,7 +32,6 @@ Partial Class dlgEditarLinea
         Me.tbxPVP = New System.Windows.Forms.TextBox()
         Me.tbxImporte = New System.Windows.Forms.TextBox()
         Me.cbxEditarDescripcion = New System.Windows.Forms.CheckBox()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ttpFormulario = New System.Windows.Forms.ToolTip(Me.components)
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.OK_Button = New System.Windows.Forms.Button()
@@ -118,28 +116,11 @@ Partial Class dlgEditarLinea
         Me.cbxEditarDescripcion.Text = "Editar la descripción (no recomendado)"
         Me.cbxEditarDescripcion.UseVisualStyleBackColor = True
         '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "actualizar.png")
-        Me.ImageList1.Images.SetKeyName(1, "Anhadir.png")
-        Me.ImageList1.Images.SetKeyName(2, "borrar.png")
-        Me.ImageList1.Images.SetKeyName(3, "confirmar.png")
-        Me.ImageList1.Images.SetKeyName(4, "derecha.png")
-        Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
-        Me.ImageList1.Images.SetKeyName(6, "lista.png")
-        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
-        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
-        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
-        Me.ImageList1.Images.SetKeyName(10, "editar.ico")
-        '
         'Cancel_Button
         '
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.ImageIndex = 3
-        Me.Cancel_Button.ImageList = Me.ImageList1
+        Me.Cancel_Button.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
         Me.Cancel_Button.Location = New System.Drawing.Point(391, 62)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(43, 44)
@@ -149,8 +130,7 @@ Partial Class dlgEditarLinea
         'OK_Button
         '
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.ImageIndex = 2
-        Me.OK_Button.ImageList = Me.ImageList1
+        Me.OK_Button.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
         Me.OK_Button.Location = New System.Drawing.Point(333, 62)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(43, 44)
@@ -205,7 +185,6 @@ Partial Class dlgEditarLinea
     Friend WithEvents tbxPVP As TextBox
     Friend WithEvents tbxImporte As TextBox
     Friend WithEvents cbxEditarDescripcion As CheckBox
-    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents ttpFormulario As ToolTip
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents OK_Button As Button

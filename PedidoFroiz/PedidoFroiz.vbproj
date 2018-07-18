@@ -122,6 +122,12 @@
     <Compile Include="frmBuscarProductos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEsperando.Designer.vb">
+      <DependentUpon>frmEsperando.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEsperando.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmListaPedidos.Designer.vb">
       <DependentUpon>frmListaPedidos.vb</DependentUpon>
     </Compile>
@@ -166,6 +172,9 @@
     <EmbeddedResource Include="frmBuscarProductos.resx">
       <DependentUpon>frmBuscarProductos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEsperando.resx">
+      <DependentUpon>frmEsperando.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmListaPedidos.resx">
       <DependentUpon>frmListaPedidos.vb</DependentUpon>
     </EmbeddedResource>
@@ -207,7 +216,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="volver.ico" />
+    <None Include="imprimir.ico" />
+    <None Include="if_edit_56106.ico" />
+    <None Include="if_window_app_list_chart_36989.png" />
+    <None Include="if_Refresh_132376.png" />
+    <None Include="if_Forward_32479.png" />
+    <None Include="if_Delete_131713.png" />
+    <None Include="if_check_13491.png" />
+    <None Include="if_Back_32435.png" />
+    <None Include="if_add_36834.png" />
+    <None Include="esperando1.gif" />
+    <None Include="buscar.ico" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\esperando.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -26,7 +26,6 @@ Partial Class frmBuscarProductos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBuscarProductos))
         Me.tbxNombreProducto = New System.Windows.Forms.TextBox()
         Me.btnBuscarProducto = New System.Windows.Forms.Button()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.lsvBusquedaProductos = New System.Windows.Forms.ListView()
         Me.Nombre = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Precio = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -45,29 +44,13 @@ Partial Class frmBuscarProductos
         '
         'btnBuscarProducto
         '
-        Me.btnBuscarProducto.ImageIndex = 7
-        Me.btnBuscarProducto.ImageList = Me.ImageList1
+        Me.btnBuscarProducto.Image = Global.PedidoFroiz.My.Resources.Resources.buscar
         Me.btnBuscarProducto.Location = New System.Drawing.Point(306, 14)
         Me.btnBuscarProducto.Name = "btnBuscarProducto"
         Me.btnBuscarProducto.Size = New System.Drawing.Size(43, 44)
         Me.btnBuscarProducto.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.btnBuscarProducto, "Buscar el producto")
         Me.btnBuscarProducto.UseVisualStyleBackColor = True
-        '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "actualizar.png")
-        Me.ImageList1.Images.SetKeyName(1, "Anhadir.png")
-        Me.ImageList1.Images.SetKeyName(2, "borrar.png")
-        Me.ImageList1.Images.SetKeyName(3, "confirmar.png")
-        Me.ImageList1.Images.SetKeyName(4, "derecha.png")
-        Me.ImageList1.Images.SetKeyName(5, "izquierda.png")
-        Me.ImageList1.Images.SetKeyName(6, "lista.png")
-        Me.ImageList1.Images.SetKeyName(7, "buscar.ico")
-        Me.ImageList1.Images.SetKeyName(8, "imprimir.ico")
-        Me.ImageList1.Images.SetKeyName(9, "volver.ico")
         '
         'lsvBusquedaProductos
         '
@@ -104,8 +87,7 @@ Partial Class frmBuscarProductos
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.ImageIndex = 3
-        Me.btnCancelar.ImageList = Me.ImageList1
+        Me.btnCancelar.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
         Me.btnCancelar.Location = New System.Drawing.Point(306, 323)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(43, 44)
@@ -115,8 +97,7 @@ Partial Class frmBuscarProductos
         '
         'btnConfirmar
         '
-        Me.btnConfirmar.ImageIndex = 2
-        Me.btnConfirmar.ImageList = Me.ImageList1
+        Me.btnConfirmar.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
         Me.btnConfirmar.Location = New System.Drawing.Point(243, 323)
         Me.btnConfirmar.Name = "btnConfirmar"
         Me.btnConfirmar.Size = New System.Drawing.Size(43, 44)
@@ -149,7 +130,6 @@ Partial Class frmBuscarProductos
 
     Friend WithEvents tbxNombreProducto As TextBox
     Friend WithEvents btnBuscarProducto As Button
-    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents lsvBusquedaProductos As ListView
     Friend WithEvents Nombre As ColumnHeader
     Friend WithEvents Precio As ColumnHeader

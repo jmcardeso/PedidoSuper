@@ -3,6 +3,7 @@ Option Explicit Off
 
 Imports System.IO
 Imports System.Xml
+Imports System.Threading
 
 Public Class frmPedidoFroiz
 #Region "Constantes"
@@ -85,8 +86,15 @@ Public Class frmPedidoFroiz
         Dim Producto, elemento As ListViewItem 'Y dos variables ListViewItem; una para recorrer el control ListView y otra para recorrer la lista de productos
         Dim sResultadoHTML As String = "" 'Declaramos una cadena para guardar la página web
         Dim Encontrado As Boolean = False 'Encontrado es el flag que nos indicará si el producto se encuentra en los resultados de la búsqueda web
+        Dim ProcesoEsperando As ThreadStart 'Declaramos las variables necesarias para trabajar con otro hilo
+        Dim hilo As Thread
 
         If lsvHistoricoProductos.Items.Count > 0 Then 'Primer control: ¿Hay elementos en la lista de productos? Si los hay, entonces...
+            'Iniciamos un nuevo hilo para mostrar una rueda girando como indicador de espera. Si no se hace en un nuevo hilo, la animación del gif no se ve
+            ProcesoEsperando = New ThreadStart(AddressOf MostrarFrmEsperando)
+            hilo = New Thread(ProcesoEsperando)
+            hilo.Start()
+
             If lsvHistoricoProductos.SelectedItems.Count > 0 Then 'Segundo control: ¿Hay alguno seleccionado? (en ese caso, sólo se actualizarán los precios de los seleccionados)
                 For Each elemento In lsvHistoricoProductos.SelectedItems 'Recorremos la lista de seleccionados...
                     sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text) 'Buscamos cada producto en la web...
@@ -121,6 +129,9 @@ Public Class frmPedidoFroiz
                 Next
                 AnhadirXMLProductos(lsvHistoricoProductos.Items, True)
             End If
+            'Abortamos el hilo de "espera" al acabar la actualización de los precios
+            hilo.Abort()
+
         Else '[Primer control] Si no hay elementos en la lista de productos, avisamos al usuario y salimos
             MessageBox.Show("La lista de productos está vacía", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
@@ -254,6 +265,18 @@ Public Class frmPedidoFroiz
     End Sub
 
 #Region "Funciones auxiliares"
+
+    ''' <summary>
+    ''' Muestra en otro hilo de ejecución una rueda girando como señal de espera
+    ''' </summary>
+    Public Sub MostrarFrmEsperando()
+        Dim frmX As Integer = frmPedidoFroiz.ActiveForm.Location.X + 139 'Las coordenadas X e Y del formulario principal, más los píxeles necesarios para centrar el cuadro en el ListView
+        Dim frmY As Integer = frmPedidoFroiz.ActiveForm.Location.Y + 140
+
+        frmEsperando.Location = New Point(frmX, frmY) 'Asignamos las coordenadas de inicio al formulario...
+        frmEsperando.ShowDialog() 'Y lo llamamos como formulario modal
+    End Sub
+
     ''' <summary>
     ''' Rellena el ListView del Histórico de Productos
     ''' </summary>

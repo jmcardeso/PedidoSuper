@@ -1,4 +1,7 @@
-﻿Imports System.Windows.Forms
+﻿Option Strict On
+Option Explicit Off
+
+Imports System.Windows.Forms
 
 Public Class dlgEditarLinea
 
@@ -28,18 +31,22 @@ Public Class dlgEditarLinea
             Exit Sub
         End If
 
-        If CDec(tbxCant.Text) = 0 Then
-            If frmPedidoAntiguo.lsvPedidoAntiguo.Items.Count = 1 Then
-                CadenaAviso = "Este es el único producto del pedido, si lo borra se borrará también el pedido, ¿Está seguro?"
-            Else
+        If CDec(tbxCant.Text) = 0 Then 'Primer control: Si ponemos un 0, es decir, queremos borrar el producto...
+            If frmPedidoAntiguo.lsvPedidoAntiguo.Items.Count = 1 Then 'Segundo control: Si sólo queda este producto en el pedido...
+                CadenaAviso = "Este es el único producto del pedido, si lo borra se borrará también el pedido, ¿Está seguro?" 'Asignamos la advertencia correspondiente a CadenaAviso
+            Else '[Segundo control] En caso contrario, sólo advertimos del borrado del producto, no del pedido
                 CadenaAviso = "El producto se borrará del pedido, ¿Está seguro?"
             End If
+
+            'Si el usuario cancela la operación de borrado, volvemos a poner la cantidad antigua en el TextBox y salimos del procedimiento
             If MessageBox.Show(CadenaAviso, "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
                 tbxCant.Text = CantidadAntigua
                 Exit Sub
             End If
         End If
 
+        'Reemplazamos los puntos por comas en los números y calculamos el importe según los nuevos datos
+        tbxCant.Text = tbxCant.Text.Replace(".", ",")
         tbxPVP.Text = tbxPVP.Text.Replace(".", ",")
         tbxImporte.Text = (CDec(tbxCant.Text) * CDec(tbxPVP.Text)).ToString
 
@@ -60,4 +67,5 @@ Public Class dlgEditarLinea
             tbxDescripcion.Text = DescripcionAntigua 'Cuando lo volvemos a poner de sólo lectura, el contenido de la descripción vuelve a ser el original
         End If
     End Sub
+
 End Class

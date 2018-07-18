@@ -3,10 +3,11 @@ Option Explicit Off
 
 Imports System.Drawing.Printing
 Imports CrystalDecisions.CrystalReports.Engine
+Imports System.Threading
 
 Public Class frmPedidoAntiguo
-    Dim PedidoSeleccionado As IEnumerable(Of XElement) 'Declaramos la variable que contendrá el pedido buscado
-    Dim TotalAntiguo As Decimal
+    Dim PedidoSeleccionado As IEnumerable(Of XElement) 'Declaramos la variable que contendrá el pedido buscado...
+    Dim TotalAntiguo As Decimal 'Y la que almacenará el total del pedido antes de editar un producto
 
     Private Sub frmPedidoAntiguo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -30,50 +31,52 @@ Public Class frmPedidoAntiguo
     End Sub
 
     Private Sub btnEditarLinea_Click(sender As Object, e As EventArgs) Handles btnEditarLinea.Click
-        Dim TotalNuevo As Decimal = 0
-        Dim NombreAntiguo As String
-        Dim ProductoBorrar, PedidoBorrar As XElement
-        Dim ListaProductos As IEnumerable(Of XElement)
+        Dim TotalNuevo As Decimal = 0 'Declaramos la variable TotalNuevo, que nos ayudará a calcular el total del pedido...
+        Dim NombreAntiguo As String 'Y NombreAntiguo, para poder buscar el producto en el pedido aun habiendo cambiado el nombre
+        Dim ProductoBorrar, PedidoBorrar As XElement 'Estas dos variables son para poder borrar elementos del xml sin tener que volver a consultar con LINQ
+        Dim ListaProductos As IEnumerable(Of XElement) 'La lista de nodos del pedido
 
-        If lsvPedidoAntiguo.SelectedItems.Count > 0 Then 'Si hay un elemento seleccionado...
+        If lsvPedidoAntiguo.SelectedItems.Count > 0 Then 'Primer control: Si hay un elemento seleccionado...
             dlgEditarLinea.tbxCant.Text = lsvPedidoAntiguo.SelectedItems.Item(0).SubItems(0).Text 'Asignamos sus datos a los TextBox del diálogo
             dlgEditarLinea.tbxDescripcion.Text = lsvPedidoAntiguo.SelectedItems.Item(0).SubItems(1).Text
             dlgEditarLinea.tbxPVP.Text = lsvPedidoAntiguo.SelectedItems.Item(0).SubItems(2).Text.TrimEnd("€"c)
             dlgEditarLinea.tbxImporte.Text = lsvPedidoAntiguo.SelectedItems.Item(0).SubItems(3).Text.TrimEnd("€"c)
-            NombreAntiguo = dlgEditarLinea.tbxDescripcion.Text
+            NombreAntiguo = dlgEditarLinea.tbxDescripcion.Text 'La descripción también la guardamos en una variable especial para poder hacer las búsquedas
 
-            If dlgEditarLinea.ShowDialog = DialogResult.OK Then 'Si el usuario confirma los cambios...
+            If dlgEditarLinea.ShowDialog = DialogResult.OK Then 'Segundo control: Si el usuario confirma los cambios...
 
-                If CDec(dlgEditarLinea.tbxCant.Text) = 0 Then
+                If CDec(dlgEditarLinea.tbxCant.Text) = 0 Then 'Tercer control: Si la cantidad es 0, es decir, si se borra el producto...
+                    'Hacemos una consulta LINQ para averiguar el producto que vamos a borrar. El resultado es necesariamente un IEnumerable aunque sepamos que sólo va a haber un elemento
                     ListaProductos = From elemento2 As XElement In (From elemento As XElement In PedidoSeleccionado.Descendants("Producto") Where elemento.Element("Nombre").Value = NombreAntiguo Select elemento)
-                    ProductoBorrar = ListaProductos.First
-                    TotalNuevo = TotalAntiguo - CDec(ProductoBorrar.Element("Precio").Value)
-                    ProductoBorrar.Remove()
-                    lsvPedidoAntiguo.Items.Remove(lsvPedidoAntiguo.SelectedItems.Item(0))
-                Else
+                    ProductoBorrar = ListaProductos.First ' Asignamos a ProductoBorrar el primer (y único) elemento del IEnumerable porque, cada vez que llamamos a ListaProductos, vuelve a hacer la consulta LINQ y en plena edición pueden cambiar los datos y dar errores
+                    TotalNuevo = TotalAntiguo - CDec(ProductoBorrar.Element("Precio").Value) 'Restamos del total el importe del producto que se va a borrar
+                    ProductoBorrar.Remove() 'Lo borramos del xml
+                    lsvPedidoAntiguo.Items.Remove(lsvPedidoAntiguo.SelectedItems.Item(0)) 'Y de la lista del control ListView
+                Else '[Tercer control] Si la cantidad no es 0, es decir, si se edita el producto...
+                    'Recorremos los productos del pedido que coincidan con el que editamos (sólo uno, en realidad)
                     For Each Producto As XElement In (From elemento As XElement In PedidoSeleccionado.Descendants("Producto") Where elemento.Element("Nombre").Value = NombreAntiguo Select elemento)
-                        Producto.Element("Unidades").Value = dlgEditarLinea.tbxCant.Text
+                        Producto.Element("Unidades").Value = dlgEditarLinea.tbxCant.Text 'Cambiamos los valores de sus nodos...
                         Producto.Element("Nombre").Value = dlgEditarLinea.tbxDescripcion.Text
                         Producto.Element("PrecioUd").Value = dlgEditarLinea.tbxPVP.Text
-                        TotalNuevo = TotalAntiguo - CDec(Producto.Element("Precio").Value)
-                        Producto.Element("Precio").Value = dlgEditarLinea.tbxImporte.Text
-                        TotalNuevo += CDec(dlgEditarLinea.tbxImporte.Text)
-                        lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(0).Text = dlgEditarLinea.tbxCant.Text
+                        TotalNuevo = TotalAntiguo - CDec(Producto.Element("Precio").Value) 'Restamos al total el importe del producto editado
+                        Producto.Element("Precio").Value = dlgEditarLinea.tbxImporte.Text 'Asignamos el nuevo importe al xml...
+                        TotalNuevo += CDec(dlgEditarLinea.tbxImporte.Text) 'Y se lo añadimos al total
+                        lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(0).Text = dlgEditarLinea.tbxCant.Text 'Asignamos los nuevos datos al elemento del ListView
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(1).Text = dlgEditarLinea.tbxDescripcion.Text
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(2).Text = dlgEditarLinea.tbxPVP.Text & "€"c
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(3).Text = dlgEditarLinea.tbxImporte.Text & "€"c
                     Next
                 End If
 
-                If TotalNuevo <= 0 Then
-                    PedidoBorrar = PedidoSeleccionado.First
-                    PedidoBorrar.Remove()
-                    Me.Close()
-                Else
-                    DibujarProductos(PedidoSeleccionado.Descendants("Producto"), True)
-                    PedidoSeleccionado.First.Attribute("Total").Value = TotalNuevo.ToString
-                    tbxTotal.Text = TotalNuevo.ToString & "€"c
-                    TotalAntiguo = TotalNuevo
+                If TotalNuevo <= 0 Then 'Si el total es 0 no quedan productos en el pedido, por tanto...
+                    PedidoBorrar = PedidoSeleccionado.First 'Asignamos el primer (y único) pedido a una variable XElement (la otra es un IEnumerabe de XElements)...
+                    PedidoBorrar.Remove() 'Borramos el pedido del xml...
+                    Me.Close() 'Y salimos del formulario
+                Else 'Si aún hay productos en el pedido...
+                    DibujarProductos(PedidoSeleccionado.Descendants("Producto"), True) 'Redibujamos el ListView...
+                    PedidoSeleccionado.First.Attribute("Total").Value = TotalNuevo.ToString 'Asignamos el nuevo total al atributo del nodo "Pedido" del xml...
+                    tbxTotal.Text = TotalNuevo.ToString & "€"c 'También se lo asignamos al TextBox del formulario...
+                    TotalAntiguo = TotalNuevo 'Y convertimos el TotalNuevo en el nuevo TotalAntiguo
                 End If
 
             End If
@@ -89,6 +92,13 @@ Public Class frmPedidoAntiguo
         Dim Columna As DataColumn 'Declaramos una variable del tipo datos de columna de la tabla...
         Dim Fila As DataRow 'Y otra del tipo datos de la fila
         Dim Encabezado, Pie As TextObject 'Por último, declaramos dos variables para el encabezado y el pie de página del informe (TextObject es un tipo de CR)
+        Dim ProcesoEsperando As ThreadStart 'Declaramos las variables necesarias para trabajar con otro hilo
+        Dim hilo As Thread
+
+        'Iniciamos un nuevo hilo para mostrar una rueda girando como indicador de espera. Si no se hace en un nuevo hilo, la animación del gif no se ve
+        ProcesoEsperando = New ThreadStart(AddressOf MostrarFrmEsperando)
+        hilo = New Thread(ProcesoEsperando)
+        hilo.Start()
 
         'Asignamos los nombres y tipos de datos de las columnas. Han de coincidir con los creados en fase de diseño
         Columna = New DataColumn With {
@@ -138,10 +148,22 @@ Public Class frmPedidoAntiguo
         plantillaPedido1.PrintOptions.PrinterName = DocImpresora.PrinterSettings.PrinterName 'Asignamos la impresora elegida al CRDocument (el objeto que controla el informe)
         plantillaPedido1.PrintToPrinter(DocImpresora.PrinterSettings.Copies, False, DocImpresora.PrinterSettings.FromPage, DocImpresora.PrinterSettings.ToPage) 'Imprimimos el informe con las opciones elegidas por el usuario
 
+        hilo.Abort()
         Me.Close() 'Salimos del formulario
     End Sub
 
 #Region "Funciones auxiliares"
+    ''' <summary>
+    ''' Muestra en otro hilo de ejecución una rueda girando como señal de espera
+    ''' </summary>
+    Public Sub MostrarFrmEsperando()
+        Dim frmX As Integer = frmPedidoAntiguo.ActiveForm.Location.X + 170 'Las coordenadas X e Y del formulario principal, más los píxeles necesarios para centrar el cuadro en el ListView
+        Dim frmY As Integer = frmPedidoAntiguo.ActiveForm.Location.Y + 135
+
+        frmEsperando.Location = New Point(frmX, frmY) 'Asignamos las coordenadas de inicio al formulario...
+        frmEsperando.ShowDialog() 'Y lo llamamos como formulario modal
+    End Sub
+
     ''' <summary>
     ''' Rellena el ListView con los productos del pedido buscado
     ''' </summary>
