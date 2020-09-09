@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmBuscarProductos
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmBuscarProductos
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBuscarProductos))
@@ -44,7 +44,7 @@ Partial Class frmBuscarProductos
         '
         'btnBuscarProducto
         '
-        Me.btnBuscarProducto.Image = Global.PedidoFroiz.My.Resources.Resources.buscar
+        Me.btnBuscarProducto.Image = Global.PedidoSúper.My.Resources.Resources.buscar
         Me.btnBuscarProducto.Location = New System.Drawing.Point(306, 14)
         Me.btnBuscarProducto.Name = "btnBuscarProducto"
         Me.btnBuscarProducto.Size = New System.Drawing.Size(43, 44)
@@ -59,6 +59,7 @@ Partial Class frmBuscarProductos
         Me.lsvBusquedaProductos.FullRowSelect = True
         Me.lsvBusquedaProductos.GridLines = True
         Me.lsvBusquedaProductos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvBusquedaProductos.HideSelection = False
         Me.lsvBusquedaProductos.Location = New System.Drawing.Point(21, 66)
         Me.lsvBusquedaProductos.Name = "lsvBusquedaProductos"
         Me.lsvBusquedaProductos.Size = New System.Drawing.Size(328, 240)
@@ -81,13 +82,13 @@ Partial Class frmBuscarProductos
         Me.Label1.Location = New System.Drawing.Point(18, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(109, 13)
-        Me.Label1.TabIndex = 3
+        Me.Label1.TabIndex = 5
         Me.Label1.Text = "Nombre del producto:"
         '
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
+        Me.btnCancelar.Image = Global.PedidoSúper.My.Resources.Resources.if_Delete_131713
         Me.btnCancelar.Location = New System.Drawing.Point(306, 323)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(43, 44)
@@ -97,7 +98,7 @@ Partial Class frmBuscarProductos
         '
         'btnConfirmar
         '
-        Me.btnConfirmar.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
+        Me.btnConfirmar.Image = Global.PedidoSúper.My.Resources.Resources.if_check_13491
         Me.btnConfirmar.Location = New System.Drawing.Point(243, 323)
         Me.btnConfirmar.Name = "btnConfirmar"
         Me.btnConfirmar.Size = New System.Drawing.Size(43, 44)
@@ -122,6 +123,7 @@ Partial Class frmBuscarProductos
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmBuscarProductos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Buscar un producto"
         Me.ResumeLayout(False)
         Me.PerformLayout()

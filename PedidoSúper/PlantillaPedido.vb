@@ -45,7 +45,7 @@ Public Class PlantillaPedido
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "PedidoFroiz.PlantillaPedido.rpt"
+            Return "PedidoSúper.PlantillaPedido.rpt"
         End Get
         Set
             'Do nothing

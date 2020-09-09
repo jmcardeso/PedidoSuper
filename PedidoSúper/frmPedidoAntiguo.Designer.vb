@@ -38,23 +38,22 @@ Partial Class frmPedidoAntiguo
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ElegirImpresora = New System.Windows.Forms.PrintDialog()
         Me.DocImpresora = New System.Drawing.Printing.PrintDocument()
-        Me.plantillaPedido1 = New PedidoFroiz.PlantillaPedido()
         Me.SuspendLayout()
         '
         'btnImprimirPedido
         '
-        Me.btnImprimirPedido.Image = Global.PedidoFroiz.My.Resources.Resources.imprimir
+        Me.btnImprimirPedido.Image = Global.PedidoSúper.My.Resources.Resources.imprimir
         Me.btnImprimirPedido.Location = New System.Drawing.Point(68, 275)
         Me.btnImprimirPedido.Name = "btnImprimirPedido"
         Me.btnImprimirPedido.Size = New System.Drawing.Size(43, 44)
-        Me.btnImprimirPedido.TabIndex = 1
+        Me.btnImprimirPedido.TabIndex = 2
         Me.ttpFormulario.SetToolTip(Me.btnImprimirPedido, "Imprimir el pedido")
         Me.btnImprimirPedido.UseVisualStyleBackColor = True
         '
         'btnVolver
         '
         Me.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnVolver.Image = Global.PedidoFroiz.My.Resources.Resources.volver
+        Me.btnVolver.Image = Global.PedidoSúper.My.Resources.Resources.volver
         Me.btnVolver.Location = New System.Drawing.Point(127, 275)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(43, 44)
@@ -65,11 +64,11 @@ Partial Class frmPedidoAntiguo
         '
         'btnEditarLinea
         '
-        Me.btnEditarLinea.Image = Global.PedidoFroiz.My.Resources.Resources.if_edit_56106
+        Me.btnEditarLinea.Image = Global.PedidoSúper.My.Resources.Resources.if_edit_56106
         Me.btnEditarLinea.Location = New System.Drawing.Point(12, 275)
         Me.btnEditarLinea.Name = "btnEditarLinea"
         Me.btnEditarLinea.Size = New System.Drawing.Size(43, 44)
-        Me.btnEditarLinea.TabIndex = 19
+        Me.btnEditarLinea.TabIndex = 1
         Me.btnEditarLinea.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.ttpFormulario.SetToolTip(Me.btnEditarLinea, "Editar una línea del pedido")
         Me.btnEditarLinea.UseVisualStyleBackColor = True
@@ -109,6 +108,7 @@ Partial Class frmPedidoAntiguo
         Me.lsvPedidoAntiguo.FullRowSelect = True
         Me.lsvPedidoAntiguo.GridLines = True
         Me.lsvPedidoAntiguo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvPedidoAntiguo.HideSelection = False
         Me.lsvPedidoAntiguo.Location = New System.Drawing.Point(12, 25)
         Me.lsvPedidoAntiguo.MultiSelect = False
         Me.lsvPedidoAntiguo.Name = "lsvPedidoAntiguo"
@@ -156,6 +156,7 @@ Partial Class frmPedidoAntiguo
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmPedidoAntiguo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Pedido:"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -173,7 +174,6 @@ Partial Class frmPedidoAntiguo
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents plantillaPedido1 As PlantillaPedido
     Friend WithEvents ElegirImpresora As PrintDialog
     Friend WithEvents DocImpresora As Printing.PrintDocument
     Friend WithEvents btnEditarLinea As Button

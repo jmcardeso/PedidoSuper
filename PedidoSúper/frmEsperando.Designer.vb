@@ -28,7 +28,7 @@ Partial Class frmEsperando
         '
         'pbxEsperando
         '
-        Me.pbxEsperando.Image = Global.PedidoFroiz.My.Resources.Resources.Esperando
+        Me.pbxEsperando.Image = Global.PedidoSúper.My.Resources.Resources.Esperando
         Me.pbxEsperando.Location = New System.Drawing.Point(0, 0)
         Me.pbxEsperando.Margin = New System.Windows.Forms.Padding(0)
         Me.pbxEsperando.MaximumSize = New System.Drawing.Size(73, 73)

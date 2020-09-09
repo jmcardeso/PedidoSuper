@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmPedidoFroiz
+Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -23,7 +23,7 @@ Partial Class frmPedidoFroiz
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPedidoFroiz))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lsvHistoricoProductos = New System.Windows.Forms.ListView()
         Me.Nombre = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -60,9 +60,11 @@ Partial Class frmPedidoFroiz
         '
         Me.lsvHistoricoProductos.BackColor = System.Drawing.SystemColors.Window
         Me.lsvHistoricoProductos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Nombre, Me.Precio})
+        Me.lsvHistoricoProductos.ForeColor = System.Drawing.SystemColors.WindowText
         Me.lsvHistoricoProductos.FullRowSelect = True
         Me.lsvHistoricoProductos.GridLines = True
         Me.lsvHistoricoProductos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvHistoricoProductos.HideSelection = False
         Me.lsvHistoricoProductos.Location = New System.Drawing.Point(12, 23)
         Me.lsvHistoricoProductos.Name = "lsvHistoricoProductos"
         Me.lsvHistoricoProductos.Size = New System.Drawing.Size(328, 240)
@@ -86,11 +88,12 @@ Partial Class frmPedidoFroiz
         Me.lsvPedido.FullRowSelect = True
         Me.lsvPedido.GridLines = True
         Me.lsvPedido.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvPedido.HideSelection = False
         Me.lsvPedido.LabelEdit = True
         Me.lsvPedido.Location = New System.Drawing.Point(431, 23)
         Me.lsvPedido.Name = "lsvPedido"
         Me.lsvPedido.Size = New System.Drawing.Size(391, 240)
-        Me.lsvPedido.TabIndex = 3
+        Me.lsvPedido.TabIndex = 2
         Me.lsvPedido.UseCompatibleStateImageBehavior = False
         Me.lsvPedido.View = System.Windows.Forms.View.Details
         '
@@ -125,7 +128,7 @@ Partial Class frmPedidoFroiz
         '
         'btnAnhadirAPedido
         '
-        Me.btnAnhadirAPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Forward_32479
+        Me.btnAnhadirAPedido.Image = Global.PedidoSúper.My.Resources.Resources.if_Forward_32479
         Me.btnAnhadirAPedido.Location = New System.Drawing.Point(364, 80)
         Me.btnAnhadirAPedido.Name = "btnAnhadirAPedido"
         Me.btnAnhadirAPedido.Size = New System.Drawing.Size(43, 40)
@@ -135,11 +138,11 @@ Partial Class frmPedidoFroiz
         '
         'btnEliminarDePedido
         '
-        Me.btnEliminarDePedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Back_32435
+        Me.btnEliminarDePedido.Image = Global.PedidoSúper.My.Resources.Resources.if_Back_32435
         Me.btnEliminarDePedido.Location = New System.Drawing.Point(364, 159)
         Me.btnEliminarDePedido.Name = "btnEliminarDePedido"
         Me.btnEliminarDePedido.Size = New System.Drawing.Size(43, 40)
-        Me.btnEliminarDePedido.TabIndex = 2
+        Me.btnEliminarDePedido.TabIndex = 3
         Me.ttpFormulario.SetToolTip(Me.btnEliminarDePedido, "Eliminar el producto del pedido")
         Me.btnEliminarDePedido.UseVisualStyleBackColor = True
         '
@@ -164,66 +167,66 @@ Partial Class frmPedidoFroiz
         '
         'btnEliminarDelHistorico
         '
-        Me.btnEliminarDelHistorico.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
+        Me.btnEliminarDelHistorico.Image = Global.PedidoSúper.My.Resources.Resources.if_Delete_131713
         Me.btnEliminarDelHistorico.Location = New System.Drawing.Point(71, 270)
         Me.btnEliminarDelHistorico.Name = "btnEliminarDelHistorico"
         Me.btnEliminarDelHistorico.Size = New System.Drawing.Size(43, 44)
-        Me.btnEliminarDelHistorico.TabIndex = 4
+        Me.btnEliminarDelHistorico.TabIndex = 5
         Me.ttpFormulario.SetToolTip(Me.btnEliminarDelHistorico, "Eliminar el producto")
         Me.btnEliminarDelHistorico.UseVisualStyleBackColor = True
         '
         'btnNuevoProducto
         '
-        Me.btnNuevoProducto.Image = Global.PedidoFroiz.My.Resources.Resources.if_add_36834
+        Me.btnNuevoProducto.Image = Global.PedidoSúper.My.Resources.Resources.if_add_36834
         Me.btnNuevoProducto.Location = New System.Drawing.Point(12, 270)
         Me.btnNuevoProducto.Name = "btnNuevoProducto"
         Me.btnNuevoProducto.Size = New System.Drawing.Size(43, 44)
-        Me.btnNuevoProducto.TabIndex = 8
+        Me.btnNuevoProducto.TabIndex = 4
         Me.btnNuevoProducto.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.ttpFormulario.SetToolTip(Me.btnNuevoProducto, "Añadir un nuevo producto")
         Me.btnNuevoProducto.UseVisualStyleBackColor = True
         '
         'btnActualizarPrecios
         '
-        Me.btnActualizarPrecios.Image = Global.PedidoFroiz.My.Resources.Resources.if_Refresh_132376
+        Me.btnActualizarPrecios.Image = Global.PedidoSúper.My.Resources.Resources.if_Refresh_132376
         Me.btnActualizarPrecios.Location = New System.Drawing.Point(129, 270)
         Me.btnActualizarPrecios.Name = "btnActualizarPrecios"
         Me.btnActualizarPrecios.Size = New System.Drawing.Size(43, 44)
-        Me.btnActualizarPrecios.TabIndex = 5
+        Me.btnActualizarPrecios.TabIndex = 6
         Me.ttpFormulario.SetToolTip(Me.btnActualizarPrecios, "Actualizar los precios")
         Me.btnActualizarPrecios.UseVisualStyleBackColor = True
         '
         'btnVerPedidos
         '
-        Me.btnVerPedidos.Image = Global.PedidoFroiz.My.Resources.Resources.if_window_app_list_chart_36989
+        Me.btnVerPedidos.Image = Global.PedidoSúper.My.Resources.Resources.if_window_app_list_chart_36989
         Me.btnVerPedidos.Location = New System.Drawing.Point(550, 270)
         Me.btnVerPedidos.Name = "btnVerPedidos"
         Me.btnVerPedidos.Size = New System.Drawing.Size(43, 44)
-        Me.btnVerPedidos.TabIndex = 6
+        Me.btnVerPedidos.TabIndex = 9
         Me.ttpFormulario.SetToolTip(Me.btnVerPedidos, "Ver los anteriores pedidos")
         Me.btnVerPedidos.UseVisualStyleBackColor = True
         '
         'btnConfirmarPedido
         '
-        Me.btnConfirmarPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
+        Me.btnConfirmarPedido.Image = Global.PedidoSúper.My.Resources.Resources.if_check_13491
         Me.btnConfirmarPedido.Location = New System.Drawing.Point(431, 270)
         Me.btnConfirmarPedido.Name = "btnConfirmarPedido"
         Me.btnConfirmarPedido.Size = New System.Drawing.Size(43, 44)
-        Me.btnConfirmarPedido.TabIndex = 9
+        Me.btnConfirmarPedido.TabIndex = 7
         Me.ttpFormulario.SetToolTip(Me.btnConfirmarPedido, "Confirmar el pedido")
         Me.btnConfirmarPedido.UseVisualStyleBackColor = True
         '
         'btnBorrarPedido
         '
-        Me.btnBorrarPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
+        Me.btnBorrarPedido.Image = Global.PedidoSúper.My.Resources.Resources.if_Delete_131713
         Me.btnBorrarPedido.Location = New System.Drawing.Point(491, 270)
         Me.btnBorrarPedido.Name = "btnBorrarPedido"
         Me.btnBorrarPedido.Size = New System.Drawing.Size(43, 44)
-        Me.btnBorrarPedido.TabIndex = 7
+        Me.btnBorrarPedido.TabIndex = 8
         Me.ttpFormulario.SetToolTip(Me.btnBorrarPedido, "Borrar el pedido")
         Me.btnBorrarPedido.UseVisualStyleBackColor = True
         '
-        'frmPedidoFroiz
+        'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -245,8 +248,9 @@ Partial Class frmPedidoFroiz
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "frmPedidoFroiz"
-        Me.Text = "PedidoFroiz"
+        Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "PedidoSúper"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

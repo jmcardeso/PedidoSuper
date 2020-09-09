@@ -5,7 +5,7 @@ Imports System.IO
 Imports System.Xml
 Imports System.Threading
 
-Public Class frmPedidoFroiz
+Public Class Form1
 #Region "Constantes"
     Public Const IDENTIFICADOR_PRECIO_INICIO = "data-price="
     Public Const IDENTIFICADOR_PRECIO_FINAL = Chr(34)
@@ -18,7 +18,7 @@ Public Class frmPedidoFroiz
     Public itemsHistoricoProductos, itemsPedido As ListViewItem
     Public RutaMisPedidos As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\Mis Pedidos"
 
-    Private Sub frmPedidoFroiz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Comprobamos si existe el directorio Mis Pedidos en Mis Documentos...
         If Not Directory.Exists(RutaMisPedidos) Then
             Directory.CreateDirectory(RutaMisPedidos)
@@ -38,6 +38,9 @@ Public Class frmPedidoFroiz
         End If
         docXMLPedidos = XElement.Load(RutaMisPedidos & "\Pedidos.xml")
 
+        'Establecemos el comparador para el ListView de pedidos dándole al constructor la columna y el orden que deseamos
+        Me.lsvPedido.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
+
         'Asignamos el ancho de las columnas de los ListView para que no aparezca una barra de scroll horizontal (queda mal estéticamente)
         lsvHistoricoProductos.Columns.Item(0).Width = 260
         lsvHistoricoProductos.Columns.Item(1).Width = 44
@@ -48,7 +51,7 @@ Public Class frmPedidoFroiz
         lsvPedido.Columns.Item(3).Width = 52
     End Sub
 
-    Private Sub frmPedidoFroiz_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         'Grabamos los ficheros en el disco antes de salir del programa
         docXMLProductos.Save(RutaMisPedidos & "\Productos.xml")
         docXMLPedidos.Save(RutaMisPedidos & "\Pedidos.xml")
@@ -98,7 +101,7 @@ Public Class frmPedidoFroiz
             If lsvHistoricoProductos.SelectedItems.Count > 0 Then 'Segundo control: ¿Hay alguno seleccionado? (en ese caso, sólo se actualizarán los precios de los seleccionados)
                 For Each elemento In lsvHistoricoProductos.SelectedItems 'Recorremos la lista de seleccionados...
                     sResultadoHTML = RetHTML(URL_BUSQUEDA & elemento.SubItems(0).Text) 'Buscamos cada producto en la web...
-                    Productos = RetProductos(sResultadoHTML) 'Y los guardamos en la lista Productos (puede haber más de un producto debido al funcionamiento de la web de Froiz)
+                    Productos = RetProductos(sResultadoHTML) 'Y los guardamos en la lista Productos (puede haber más de un producto debido al funcionamiento de la web de Acme)
                     For Each Producto In Productos 'Recorremos la lista Productos...
                         If Producto.SubItems(0).Text = elemento.SubItems(0).Text Then 'Y en caso de que el nombre sea igual al que buscamos...
                             elemento.SubItems(1).Text = Producto.SubItems(1).Text 'Asignamos el precio que aparece en la web al campo precio del producto...
@@ -137,61 +140,69 @@ Public Class frmPedidoFroiz
         End If
     End Sub
 
-    Private Sub btnAnhadirAPedido_Click(sender As Object, e As EventArgs) Handles btnAnhadirAPedido.Click
+    Private Sub btnAnhadirAPedido_Click(sender As Object, e As EventArgs) Handles btnAnhadirAPedido.Click, lsvHistoricoProductos.DoubleClick
         Dim itemsSeleccionados As ListView.SelectedListViewItemCollection = lsvHistoricoProductos.SelectedItems 'Creamos una colección con los elementos seleccionados en el ListView
         Dim nuevoItem, itemRepetido As ListViewItem 'Declaramos dos variables de tipo ListViewItem. Una para poder volcar la información de la colección de seleccionados sin que dé errores y otra para buscar productos repetidos
         Dim itemProductosPedido = New ListViewItem 'Esta variable la necesitamos para el bucle For Each. Reutilizamos la que empleamos en el procedimento de búsqueda
         Dim n As Integer
         Dim Total As Decimal = 0
 
-        If itemsSeleccionados.Count > 0 Then 'Si hay algún elemento seleccionado...
+        If itemsSeleccionados.Count > 0 Then 'Primer control: Si hay algún elemento seleccionado...
             If tbxTotal.Text.Length > 0 Then Total = CDec(tbxTotal.Text.TrimEnd("€"c)) 'Si hay total, ponlo en la variable
-            n = lsvPedido.Items.Count 'Asignamos al índice la posición del último elemento del histórico de productos para continuar a partir de ahí
             For Each itemProductosPedido In itemsSeleccionados
                 nuevoItem = New ListViewItem 'Reinicializamos la variable llamando a su constructor
-                If n Mod 2 <> 0 Then
-                    nuevoItem.BackColor = Color.Honeydew 'Si es impar, este color de fondo...
-                Else
-                    nuevoItem.BackColor = Color.White 'Si es par, blanco
-                End If
+
                 nuevoItem.SubItems(0).Text = "1" 'Ponemos una unidad del producto por defecto...
                 nuevoItem.SubItems.Add(itemProductosPedido.SubItems(0).Text) 'Ponemos el nombre del producto...
                 nuevoItem.SubItems.Add(itemProductosPedido.SubItems(1).Text) 'Su precio, que ya incluye el símbolo del euro...
                 nuevoItem.SubItems.Add(nuevoItem.SubItems(2).Text) 'Y el precio*unidades, también con el euro (por ahora es el mismo que el precio de 1 ud.)
                 itemRepetido = lsvPedido.FindItemWithText(nuevoItem.SubItems(1).Text) 'Buscamos si el producto ya está en la lista
-                If itemRepetido IsNot Nothing Then 'Si el producto ya está en el pedido...
-                    If itemRepetido.SubItems(2).Text <> nuevoItem.SubItems(2).Text Then
+                If itemRepetido IsNot Nothing Then 'Segundo control: Si el producto ya está en el pedido...
+                    If itemRepetido.SubItems(2).Text <> nuevoItem.SubItems(2).Text Then 'Tercer control: Si el P.V.P. es distinto al que ya había...
                         If MessageBox.Show("El producto " & Chr(34) & nuevoItem.SubItems(1).Text & Chr(34) & " ya está en el pedido y su precio ha cambiado, ¿Desea añadir una unidad y actualizar el precio?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
                             itemRepetido.SubItems(0).Text = (CDec(itemRepetido.SubItems(0).Text) + 1).ToString 'Le sumamos 1 a las unidades
                             Total -= CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Restamos del total el precio de la línea
                             itemRepetido.SubItems(2).Text = nuevoItem.SubItems(2).Text 'Actualizamos el PVP...
-                            itemRepetido.SubItems(3).Text = (CDec(itemRepetido.SubItems(0).Text.TrimEnd("€"c)) * CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c))).ToString & "€" 'Multiplicamos las unidades por su PVP...
+                            itemRepetido.SubItems(3).Text = Math.Round(CDec(itemRepetido.SubItems(0).Text.TrimEnd("€"c)) * CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c)), 2).ToString & "€" 'Multiplicamos las unidades por su PVP...
                             Total += CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Recalculamos el total...
                         End If
                         Continue For 'Y pasamos a la siguiente iteración del bucle
                     End If
+                    'Tercer control*: Si el P.V.P. es el mismo...
                     If MessageBox.Show("El producto " & Chr(34) & nuevoItem.SubItems(1).Text & Chr(34) & " ya está en el pedido, ¿Desea añadir una unidad?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then 'Preguntamos si queremos añadir una unidad
                         itemRepetido.SubItems(0).Text = (CDec(itemRepetido.SubItems(0).Text) + 1).ToString 'Le sumamos 1 a las unidades
                         Total -= CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Restamos del total el precio de la línea
-                        itemRepetido.SubItems(3).Text = (CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) + CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c))).ToString & "€" 'Sumamos al precio de la línea el precio de 1 unidad del producto
+                        itemRepetido.SubItems(3).Text = Math.Round(CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) + CDec(nuevoItem.SubItems(2).Text.TrimEnd("€"c)), 2).ToString & "€" 'Sumamos al precio de la línea el precio de 1 unidad del producto
                         Total += CDec(itemRepetido.SubItems(3).Text.TrimEnd("€"c)) 'Y recalculamos el total
                     End If
-                Else 'Si el producto no está en el pedido...
+                Else '[Segundo control] Si el producto no está en el pedido...
                     lsvPedido.Items.Add(nuevoItem) 'Lo añadimos a la lista...
                     Total += CDec(nuevoItem.SubItems(3).Text.TrimEnd("€"c)) 'Y calculamos el nuevo total
                     n += 1 'Sumamos 1 al índice de posición
                 End If
             Next
-            tbxTotal.Text = Total.ToString & "€" 'Ponemos el total en su TextBox...
+
+            'Ordenamos la columna "descripción" antes de colorear las líneas
+            lsvPedido.Sort()
+
+            For n = 0 To lsvPedido.Items.Count - 1
+                If n Mod 2 <> 0 Then
+                    lsvPedido.Items.Item(n).BackColor = Color.Honeydew 'Si es impar, este color de fondo...
+                Else
+                    lsvPedido.Items.Item(n).BackColor = Color.White 'Si es par, blanco
+                End If
+            Next
+
+            tbxTotal.Text = Total.ToString ' Math.Round(Total, 2).ToString & "€" 'Ponemos el total en su TextBox...
             lsvHistoricoProductos.SelectedItems.Clear() 'Y desmarcamos la selección
-        Else
+        Else '[Primer control] Si no hay ningún producto seleccionado, avisamos al usuario
             MessageBox.Show("No se ha seleccionado ningún producto", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
 
     Private Sub lsvPedido_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles lsvPedido.AfterLabelEdit
         Dim Total As Decimal = 0
-        Dim Unidad As Integer = 0
+        Dim Unidad As Decimal = 0
         Dim Etiqueta As String
 
         If e.Label IsNot Nothing Then 'Comprobamos que no sea nulo porque nos puede generar una excepción si cambiamos de campo mientras están seleccionadas las unidades
@@ -199,15 +210,15 @@ Public Class frmPedidoFroiz
 
             If tbxTotal.Text.Length > 0 Then Total = CDec(tbxTotal.Text.TrimEnd("€"c)) 'Si hay total, ponlo en la variable
             If IsNumeric(Etiqueta) Then 'Si introdujimos un número...
-                Unidad = CInt(Etiqueta) 'Guardamos la unidad en una variable entera para eliminar los decimales
-                If Unidad > 0 And CDec(Etiqueta) = Unidad Then 'Si las unidades son al menos 1 y, además, no tienen decimales...
-                    lsvPedido.Items(e.Item).SubItems(0).Text = Unidad.ToString 'Reasignamos las unidades a su campo de texto en el ListView sin decimales
+                Unidad = CDec(Etiqueta) 'Guardamos la unidad en una variable decimal
+                If Unidad > 0 Then 'Si las unidades son al menos 1...
+                    '  lsvPedido.Items(e.Item).SubItems(0).Text = Unidad.ToString 'Reasignamos las unidades a su campo de texto en el ListView sin decimales
                     Total -= CDec(lsvPedido.Items(e.Item).SubItems(3).Text.TrimEnd("€"c)) 'Restamos del total lo que había en esa línea
-                    lsvPedido.Items(e.Item).SubItems(3).Text = (Unidad * CDec(lsvPedido.Items(e.Item).SubItems(2).Text.TrimEnd("€"c))).ToString & "€" 'Y multiplicamos el precio/unidad por las nuevas unidades introducidas guardándolo en su campo de texto
+                    lsvPedido.Items(e.Item).SubItems(3).Text = Math.Round(Unidad * CDec(lsvPedido.Items(e.Item).SubItems(2).Text.TrimEnd("€"c)), 2).ToString & "€" 'Y multiplicamos el precio/unidad por las nuevas unidades introducidas guardándolo en su campo de texto
                     Total += CDec(lsvPedido.Items(e.Item).SubItems(3).Text.TrimEnd("€"c)) 'Recalculamos el total...
-                    tbxTotal.Text = Total.ToString & "€" 'Y lo ponemos en el TextBox correspondiente
+                    tbxTotal.Text = Total.ToString 'Math.Round(Total, 2).ToString & "€" 'Y lo ponemos en el TextBox correspondiente
                 Else
-                    MessageBox.Show("La cantidad es menor que 1 o contiene decimales", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("La cantidad es menor que 1", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     e.CancelEdit = True 'Si las unidades son menos que 1 o tienen decimales, cancelamos
                 End If
             Else
@@ -217,9 +228,10 @@ Public Class frmPedidoFroiz
         End If
     End Sub
 
-    Private Sub btnEliminarDePedido_Click(sender As Object, e As EventArgs) Handles btnEliminarDePedido.Click
+    Private Sub btnEliminarDePedido_Click(sender As Object, e As EventArgs) Handles btnEliminarDePedido.Click, lsvPedido.DoubleClick
         Dim Total As Decimal = 0
         Dim item As ListViewItem
+        Dim n As Integer
 
         If tbxTotal.Text.Length > 0 Then Total = CDec(tbxTotal.Text.TrimEnd("€"c)) 'Si hay total, lo asignamos a su variable
         If lsvPedido.SelectedItems.Count > 0 Then 'Si hemos seleccionado algún producto para borrar...
@@ -227,6 +239,18 @@ Public Class frmPedidoFroiz
                 Total -= CDec(item.SubItems(3).Text.TrimEnd("€"c)) 'Descontamos su precio total del general...
                 lsvPedido.Items.Remove(item) 'Y borramos el elemento del ListView de pedidos
             Next
+
+            'Ordenamos la columna "descripción" antes de colorear las líneas
+            lsvPedido.Sort()
+
+            For n = 0 To lsvPedido.Items.Count - 1
+                If n Mod 2 <> 0 Then
+                    lsvPedido.Items.Item(n).BackColor = Color.Honeydew 'Si es impar, este color de fondo...
+                Else
+                    lsvPedido.Items.Item(n).BackColor = Color.White 'Si es par, blanco
+                End If
+            Next
+
             If Total > 0 Then 'Si el total es mayor que cero, lo asignamos al texto del botón y le añadimos el símbolo del euro
                 tbxTotal.Text = Total.ToString & "€"
             Else
@@ -270,8 +294,8 @@ Public Class frmPedidoFroiz
     ''' Muestra en otro hilo de ejecución una rueda girando como señal de espera
     ''' </summary>
     Public Sub MostrarFrmEsperando()
-        Dim frmX As Integer = frmPedidoFroiz.ActiveForm.Location.X + 139 'Las coordenadas X e Y del formulario principal, más los píxeles necesarios para centrar el cuadro en el ListView
-        Dim frmY As Integer = frmPedidoFroiz.ActiveForm.Location.Y + 140
+        Dim frmX As Integer = Form1.ActiveForm.Location.X + 139 'Las coordenadas X e Y del formulario principal, más los píxeles necesarios para centrar el cuadro en el ListView
+        Dim frmY As Integer = Form1.ActiveForm.Location.Y + 140
 
         frmEsperando.Location = New Point(frmX, frmY) 'Asignamos las coordenadas de inicio al formulario...
         frmEsperando.ShowDialog() 'Y lo llamamos como formulario modal
@@ -294,7 +318,7 @@ Public Class frmPedidoFroiz
             itemsHistoricoProductos.SubItems.Add(elemento.Element("Precio").Value & "€") 'Y el precio...
             lsvHistoricoProductos.Items.Add(itemsHistoricoProductos) 'Y los añadimos al ListView
         Next
-        lsvHistoricoProductos.Sorting = SortOrder.Ascending 'Forzamos la ordenación de la lista antes de colorear las línas para que queden bien
+        lsvHistoricoProductos.Sorting = SortOrder.Ascending 'Forzamos la ordenación de la lista antes de colorear las líneas para que queden bien
 
         For Each item In lsvHistoricoProductos.Items
             If n Mod 2 <> 0 Then 'Si es par dibujamos en un color, si es impar en el otro

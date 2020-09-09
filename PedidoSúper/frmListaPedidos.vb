@@ -16,13 +16,24 @@ Public Class frmListaPedidos
             dtpHastaFecha.Value = Date.Now
             Exit Sub
         End If
-        ListaPedidos = From elemento In frmPedidoFroiz.docXMLPedidos.Descendants("Pedido") Where CDate(elemento.Attribute("Fecha").Value) >= CDate(dtpDesdeFecha.Value.ToShortDateString) And CDate(elemento.Attribute("Fecha").Value) <= CDate(dtpHastaFecha.Value.ToShortDateString) Select elemento
+        ListaPedidos = From elemento In Form1.docXMLPedidos.Descendants("Pedido") Where CDate(elemento.Attribute("Fecha").Value) >= CDate(dtpDesdeFecha.Value.ToShortDateString) And CDate(elemento.Attribute("Fecha").Value) <= CDate(dtpHastaFecha.Value.ToShortDateString) Select elemento
         If ListaPedidos.Count = 0 Then
             MessageBox.Show("No se ha encontrado ningún pedido entre esas fechas", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information)
             BorrarPantallaBusqueda()
         Else
             DibujarPedidos(ListaPedidos, True)
         End If
+    End Sub
+
+    Private Sub btnVerPedido_Click(sender As Object, e As EventArgs) Handles btnVerPedido.Click
+        If lsvBusquedaPedidos.SelectedItems.Count <> 1 Then
+            MessageBox.Show("No hay ningún pedido seleccionado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.DialogResult = DialogResult.None 'Indica que el formulario aún se está ejecutando (para no salir al principal)
+        End If
+    End Sub
+
+    Private Sub lsvBusquedaPedidos_DoubleClick(sender As Object, e As EventArgs) Handles lsvBusquedaPedidos.DoubleClick
+        Me.DialogResult = DialogResult.OK 'Esto equivale a pulsar el botón btnVerPedido (no hay que hacer comprobaciones, puesto que si se hace doble click es porque hay un elemento seleccionado)
     End Sub
 
 #Region "Funciones auxiliares"
@@ -58,19 +69,14 @@ Public Class frmListaPedidos
         Next
     End Sub
 
+    ''' <summary>
+    ''' Borra la pantalla de búsqueda y pone las fechas a día de hoy
+    ''' </summary>
     Public Sub BorrarPantallaBusqueda()
         lsvBusquedaPedidos.Items.Clear()
         dtpDesdeFecha.Value = Date.Now
         dtpHastaFecha.Value = dtpDesdeFecha.Value
     End Sub
-
-    Private Sub btnVerPedido_Click(sender As Object, e As EventArgs) Handles btnVerPedido.Click
-        If lsvBusquedaPedidos.SelectedItems.Count <> 1 Then
-            MessageBox.Show("No hay ningún pedido seleccionado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.DialogResult = DialogResult.None 'Indica que el formulario aún se está ejecutando (para no salir al principal)
-        End If
-    End Sub
-
 #End Region
 End Class
 

@@ -14,6 +14,7 @@ Public Class dlgEditarLinea
         DescripcionAntigua = tbxDescripcion.Text
         PVPAntiguo = tbxPVP.Text
         ImporteAntiguo = tbxImporte.Text
+        cbxEditarDescripcion.Checked = False
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
@@ -48,7 +49,7 @@ Public Class dlgEditarLinea
         'Reemplazamos los puntos por comas en los números y calculamos el importe según los nuevos datos
         tbxCant.Text = tbxCant.Text.Replace(".", ",")
         tbxPVP.Text = tbxPVP.Text.Replace(".", ",")
-        tbxImporte.Text = (CDec(tbxCant.Text) * CDec(tbxPVP.Text)).ToString
+        tbxImporte.Text = Math.Round(CDec(tbxCant.Text) * CDec(tbxPVP.Text), 2).ToString
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK 'Si todo fue bien, salimos del cuadro de diálogo con el resultado OK
         Me.Close()

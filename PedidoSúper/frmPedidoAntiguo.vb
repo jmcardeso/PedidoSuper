@@ -13,7 +13,7 @@ Public Class frmPedidoAntiguo
 
         'Asignamos el ancho de las columnas por código (en modo diseño no lo hace bien)
         lsvPedidoAntiguo.Columns.Item(0).Width = 38
-        lsvPedidoAntiguo.Columns.Item(1).Width = 230
+        lsvPedidoAntiguo.Columns.Item(1).Width = 220
         lsvPedidoAntiguo.Columns.Item(2).Width = 45
         lsvPedidoAntiguo.Columns.Item(3).Width = 52
 
@@ -22,7 +22,7 @@ Public Class frmPedidoAntiguo
         TotalAntiguo = CDec(tbxTotal.Text.TrimEnd("€"c)) 'Almacenamos el total antiguo para poder trabajar con él
 
         ' Realizamos una consulta LINQ para obtener un pedido cuya fecha y total sean los seleccionados
-        PedidoSeleccionado = From elemento In frmPedidoFroiz.docXMLPedidos.Descendants("Pedido") Where CDate(elemento.Attribute("Fecha").Value) = CDate(frmListaPedidos.lsvBusquedaPedidos.SelectedItems(0).SubItems(0).Text) And elemento.Attribute("Total").Value = TotalAntiguo.ToString Select elemento
+        PedidoSeleccionado = From elemento In Form1.docXMLPedidos.Descendants("Pedido") Where CDate(elemento.Attribute("Fecha").Value) = CDate(frmListaPedidos.lsvBusquedaPedidos.SelectedItems(0).SubItems(0).Text) And elemento.Attribute("Total").Value = TotalAntiguo.ToString Select elemento
         If PedidoSeleccionado.Count <> 1 Then 'Si no hay ningún pedido o más de uno, advertimos al usuario de un error y salimos
             MessageBox.Show("Se ha producido un error inesperado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
@@ -30,7 +30,7 @@ Public Class frmPedidoAntiguo
         DibujarProductos(PedidoSeleccionado.Descendants("Producto"), True) 'En caso contrario, dibujamos el pedido en el ListView
     End Sub
 
-    Private Sub btnEditarLinea_Click(sender As Object, e As EventArgs) Handles btnEditarLinea.Click
+    Private Sub btnEditarLinea_Click(sender As Object, e As EventArgs) Handles btnEditarLinea.Click, lsvPedidoAntiguo.DoubleClick
         Dim TotalNuevo As Decimal = 0 'Declaramos la variable TotalNuevo, que nos ayudará a calcular el total del pedido...
         Dim NombreAntiguo As String 'Y NombreAntiguo, para poder buscar el producto en el pedido aun habiendo cambiado el nombre
         Dim ProductoBorrar, PedidoBorrar As XElement 'Estas dos variables son para poder borrar elementos del xml sin tener que volver a consultar con LINQ
@@ -61,6 +61,7 @@ Public Class frmPedidoAntiguo
                         TotalNuevo = TotalAntiguo - CDec(Producto.Element("Precio").Value) 'Restamos al total el importe del producto editado
                         Producto.Element("Precio").Value = dlgEditarLinea.tbxImporte.Text 'Asignamos el nuevo importe al xml...
                         TotalNuevo += CDec(dlgEditarLinea.tbxImporte.Text) 'Y se lo añadimos al total
+                        ' TotalNuevo = Math.Round(TotalNuevo, 2)
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(0).Text = dlgEditarLinea.tbxCant.Text 'Asignamos los nuevos datos al elemento del ListView
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(1).Text = dlgEditarLinea.tbxDescripcion.Text
                         lsvPedidoAntiguo.Items.Item(lsvPedidoAntiguo.SelectedIndices(0)).SubItems(2).Text = dlgEditarLinea.tbxPVP.Text & "€"c
@@ -133,6 +134,8 @@ Public Class frmPedidoAntiguo
             Fila("Importe") = elemento.SubItems(3).Text
             Tabla.Rows.Add(Fila) 'Añadimos la fila a la colección de filas de la tabla
         Next
+
+        Dim plantillaPedido1 As PlantillaPedido = New PlantillaPedido()
 
         Encabezado = CType(plantillaPedido1.ReportDefinition.ReportObjects.Item("Encabezado"), TextObject) 'Asignamos el encabezado del informe previamente diseñado a la variable, forzando su tipo a TextObject para poder usar su propiedad Text
         Encabezado.Text = Me.Text 'Ponemos como texto del encabezado el texto "Pedido: fecha del pedido"

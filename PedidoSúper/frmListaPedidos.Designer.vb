@@ -73,7 +73,7 @@ Partial Class frmListaPedidos
         '
         'btnBuscar
         '
-        Me.btnBuscar.Image = Global.PedidoFroiz.My.Resources.Resources.buscar
+        Me.btnBuscar.Image = Global.PedidoSúper.My.Resources.Resources.buscar
         Me.btnBuscar.Location = New System.Drawing.Point(300, 12)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(43, 44)
@@ -84,7 +84,7 @@ Partial Class frmListaPedidos
         'btnVerPedido
         '
         Me.btnVerPedido.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnVerPedido.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
+        Me.btnVerPedido.Image = Global.PedidoSúper.My.Resources.Resources.if_check_13491
         Me.btnVerPedido.Location = New System.Drawing.Point(243, 394)
         Me.btnVerPedido.Name = "btnVerPedido"
         Me.btnVerPedido.Size = New System.Drawing.Size(43, 44)
@@ -95,7 +95,7 @@ Partial Class frmListaPedidos
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
+        Me.btnCancelar.Image = Global.PedidoSúper.My.Resources.Resources.if_Delete_131713
         Me.btnCancelar.Location = New System.Drawing.Point(300, 394)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(43, 44)
@@ -110,6 +110,7 @@ Partial Class frmListaPedidos
         Me.lsvBusquedaPedidos.FullRowSelect = True
         Me.lsvBusquedaPedidos.GridLines = True
         Me.lsvBusquedaPedidos.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lsvBusquedaPedidos.HideSelection = False
         Me.lsvBusquedaPedidos.Location = New System.Drawing.Point(15, 73)
         Me.lsvBusquedaPedidos.MultiSelect = False
         Me.lsvBusquedaPedidos.Name = "lsvBusquedaPedidos"
@@ -146,6 +147,7 @@ Partial Class frmListaPedidos
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmListaPedidos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Lista de pedidos"
         Me.ResumeLayout(False)
         Me.PerformLayout()

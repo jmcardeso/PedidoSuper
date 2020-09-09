@@ -4,12 +4,17 @@ Option Explicit Off
 Imports System.Threading
 
 Public Class frmBuscarProductos
-
     Public itemsBusquedaProductos As ListViewItem
 
     Private Sub frmBuscarProductos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lsvBusquedaProductos.Items.Clear() 'Borramos el ListView y el TextBox al cargar el formulario
         tbxNombreProducto.Text = ""
+    End Sub
+
+    Private Sub tbxNombreProducto_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tbxNombreProducto.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then 'Si pulsamos enter en el TextBox...
+            Me.Controls("btnBuscarProducto").Focus() 'Obligamos a poner el foco en el botón de buscar producto y, como resultado, al pulsar enter también se pulsa el botón
+        End If
     End Sub
 
     Private Sub btnBuscarProducto_Click(sender As Object, e As EventArgs) Handles btnBuscarProducto.Click
@@ -21,15 +26,18 @@ Public Class frmBuscarProductos
         Dim hilo As Thread
 
         lsvBusquedaProductos.Items.Clear() 'Antes de empezar la búsqueda, borramos la lista
-        If tbxNombreProducto.Text.Length = 0 Then Exit Sub 'Si no hay ningún producto que buscar, salimos del procedimiento
+        If tbxNombreProducto.Text.Length = 0 Then
+            MessageBox.Show("No hay ningún producto que buscar", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub 'Si no hay ningún producto que buscar, salimos del procedimiento
+        End If
 
         'Iniciamos un nuevo hilo para mostrar una rueda girando como indicador de espera. Si no se hace en un nuevo hilo, la animación del gif no se ve
         ProcesoEsperando = New ThreadStart(AddressOf MostrarFrmEsperando)
         hilo = New Thread(ProcesoEsperando)
         hilo.Start()
 
-        sResultadoHTML = frmPedidoFroiz.RetHTML(frmPedidoFroiz.URL_BUSQUEDA & tbxNombreProducto.Text) 'Buscamos el producto en la web..
-        Productos = frmPedidoFroiz.RetProductos(sResultadoHTML) 'Y asignamos el resultado a la lista de productos
+        sResultadoHTML = Form1.RetHTML(Form1.URL_BUSQUEDA & tbxNombreProducto.Text) 'Buscamos el producto en la web..
+        Productos = Form1.RetProductos(sResultadoHTML) 'Y asignamos el resultado a la lista de productos
 
         For Each Producto In Productos 'Recorremos la lista y asignamos colores alternos a los elementos del ListView
             If n Mod 2 <> 0 Then
@@ -45,10 +53,10 @@ Public Class frmBuscarProductos
 
     End Sub
 
-    Private Sub btnConfirmar_Click(sender As Object, e As EventArgs) Handles btnConfirmar.Click
+    Private Sub btnConfirmar_Click(sender As Object, e As EventArgs) Handles btnConfirmar.Click, lsvBusquedaProductos.DoubleClick
         If lsvBusquedaProductos.SelectedItems.Count > 0 Then 'Si hay algún elemento seleccionado...
-            frmPedidoFroiz.AnhadirXMLProductos(lsvBusquedaProductos.SelectedItems) 'Si el producto no está repetido, lo añadimos al xml y..
-            frmPedidoFroiz.DibujarHistoricoProductos(frmPedidoFroiz.docXMLProductos.Descendants("Producto"), True) 'Lo añadimos a la lista del formulario principal
+            Form1.AnhadirXMLProductos(lsvBusquedaProductos.SelectedItems) 'Si el producto no está repetido, lo añadimos al xml y..
+            Form1.DibujarHistoricoProductos(Form1.docXMLProductos.Descendants("Producto"), True) 'Lo añadimos a la lista del formulario principal
             Me.Close() 'Cerramos el formulario modal
         Else
             MessageBox.Show("No se ha seleccionado ningún producto", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning)

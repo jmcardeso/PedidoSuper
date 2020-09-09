@@ -120,7 +120,7 @@ Partial Class dlgEditarLinea
         '
         Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Image = Global.PedidoFroiz.My.Resources.Resources.if_Delete_131713
+        Me.Cancel_Button.Image = Global.PedidoSúper.My.Resources.Resources.if_Delete_131713
         Me.Cancel_Button.Location = New System.Drawing.Point(391, 62)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(43, 44)
@@ -130,7 +130,7 @@ Partial Class dlgEditarLinea
         'OK_Button
         '
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Image = Global.PedidoFroiz.My.Resources.Resources.if_check_13491
+        Me.OK_Button.Image = Global.PedidoSúper.My.Resources.Resources.if_check_13491
         Me.OK_Button.Location = New System.Drawing.Point(333, 62)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(43, 44)
